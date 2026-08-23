@@ -85,7 +85,7 @@ function storefrontProducts() {
 }
 
 function allColorProducts() {
-  return PRODUCTS.filter((product) => !METALLIC_PRODUCT_IDS.has(product.id));
+  return PRODUCTS.filter((product) => product.id !== 'testing' && !METALLIC_PRODUCT_IDS.has(product.id));
 }
 
 function productImage(product) {
