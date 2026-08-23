@@ -339,9 +339,15 @@ function reviewsHTML(product, selectedVariant) {
   const productId = product.variants ? selectedVariant.id : product.id;
   const reviews = reviewsFor(productId);
   const average = reviews.length ? reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length : 0;
+  const ratingPercent = (rating) => reviews.length ? Math.round(reviews.filter((review) => review.rating === rating).length / reviews.length * 100) : 0;
+  const photoCount = reviews.filter((review) => review.image).length;
   return `
     <section class="reviews-section" aria-labelledby="reviews-title">
-      <div class="reviews-head"><div><h2 id="reviews-title">Reviews</h2><div class="reviews-summary">${reviews.length ? `${average.toFixed(1)} out of 5 · ${reviews.length} review${reviews.length === 1 ? '' : 's'}` : 'Be the first to review this product.'}</div></div></div>
+      <div class="review-overview">
+        <div class="review-overview-top"><h2 id="reviews-title">Reviews</h2><span>|</span><span class="review-overview-average">${reviews.length ? average.toFixed(1) : '0.0'}</span><span class="review-overview-stars" aria-label="${average.toFixed(1)} out of 5 stars">★★★★★</span><span class="reviews-summary">${reviews.length} rating${reviews.length === 1 ? '' : 's'}</span><span class="review-verified">✓ Customer reviews</span></div>
+        <div class="review-bars">${[['Ease of use', 5], ['Design', 4], ['Quality of material', 3]].map(([label, rating]) => `<div class="review-bar"><div class="review-bar-top"><span>${label}</span><strong>${ratingPercent(rating)}%</strong></div><div class="review-bar-track"><div class="review-bar-fill" style="width:${ratingPercent(rating)}%"></div></div></div>`).join('')}</div>
+        <div class="review-filters"><button class="review-filter" type="button">All ratings</button><button class="review-filter" type="button">▧ (${photoCount})</button><button class="review-filter" type="button">★★★★★ (${reviews.filter((review) => review.rating === 5).length})</button></div>
+      </div>
       <form class="review-form" onsubmit="submitReview(event, '${productId}')">
         <input name="reviewer" type="text" maxlength="60" placeholder="Your name" required />
         <div class="review-rating" role="group" aria-label="Rating">

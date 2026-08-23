@@ -218,6 +218,19 @@
   .reviews-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 24px; }
   .reviews-head h2 { font-size: 24px; }
   .reviews-summary { color: var(--text-muted); font-size: 13px; }
+  .review-overview { margin-bottom: 24px; }
+  .review-overview-top { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .review-overview-top h2 { font-size: 24px; }
+  .review-overview-average { font-size: 21px; font-weight: 700; }
+  .review-overview-stars { color: #F2B84B; letter-spacing: 2px; font-size: 19px; }
+  .review-verified { color: #008A5B; font-size: 13px; font-weight: 600; }
+  .review-bars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 18px; }
+  .review-bar { padding: 10px 12px; background: var(--bg-soft); font-size: 12px; }
+  .review-bar-top { display: flex; justify-content: space-between; gap: 8px; }
+  .review-bar-track { height: 5px; margin-top: 8px; background: var(--border); }
+  .review-bar-fill { height: 100%; background: var(--text); }
+  .review-filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 24px; }
+  .review-filter { padding: 9px 12px; border: 1px solid var(--border); background: white; border-radius: var(--r-sm); font-size: 12px; }
   .review-form { display: grid; gap: 12px; background: var(--bg-soft); border-radius: var(--r-card); padding: 20px; margin-bottom: 24px; }
   .review-form input, .review-form textarea { width: 100%; padding: 11px 13px; border: 1px solid var(--border); border-radius: var(--r-sm); font: inherit; background: white; }
   .review-form input[type="file"] { padding: 9px; font-size: 12px; }
@@ -239,7 +252,7 @@
   .home-review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
   .home-review-card { padding: 20px; border: 1px solid var(--border); border-radius: var(--r-card); }
   @media (max-width: 700px) { .home-review-grid { grid-template-columns: 1fr; } }
-  @media (max-width: 600px) { .reviews-head { display: block; } .reviews-summary { margin-top: 6px; } }
+  @media (max-width: 600px) { .reviews-head { display: block; } .reviews-summary { margin-top: 6px; } .review-bars { grid-template-columns: 1fr; } }
 
   /* ---------- Cart drawer ---------- */
   #cart-overlay { position: fixed; inset: 0; background: rgba(11,18,32,0.4); z-index: 90; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
