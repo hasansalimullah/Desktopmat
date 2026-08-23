@@ -326,6 +326,11 @@ function escapeHTML(value) {
   return String(value).replace(/[&<>'"]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[character]));
 }
 
+function privateName(name) {
+  const parts = String(name || '').trim().split(/\s+/).filter(Boolean);
+  return parts.length ? parts.map((part) => `${part.charAt(0).toUpperCase()}*****`).join(' ') : 'Customer';
+}
+
 function reviewsFor(productId) {
   try {
     const reviews = JSON.parse(localStorage.getItem(REVIEWS_KEY) || '{}');
@@ -360,7 +365,7 @@ function reviewsHTML(product, selectedVariant) {
         <button class="btn btn-black" type="submit">Submit review</button>
       </form>
       <div class="review-list">${reviews.map((review) => `
-        <article class="review-item"><div class="review-item-top"><span class="review-author">${escapeHTML(review.name)}</span><span class="review-date">${escapeHTML(review.date)}</span></div><div class="review-stars" aria-label="${review.rating} out of 5 stars">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div><p class="review-text">${escapeHTML(review.comment)}</p>${review.image ? `<img class="review-image" src="${review.image}" alt="Photo shared by ${escapeHTML(review.name)}" />` : ''}</article>
+        <article class="review-item"><div class="review-item-top"><span class="review-author">${escapeHTML(privateName(review.name))}</span><span class="review-date">${escapeHTML(review.date)}</span></div><div class="review-stars" aria-label="${review.rating} out of 5 stars">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div><p class="review-text">${escapeHTML(review.comment)}</p>${review.image ? `<img class="review-image" src="${review.image}" alt="Photo shared by customer" />` : ''}</article>
       `).join('')}</div>
     </section>
   `;
@@ -377,7 +382,7 @@ function homeReviewsHTML() {
     <section class="home-reviews" aria-labelledby="home-reviews-title">
       <h2 id="home-reviews-title">What customers are saying</h2>
       <div class="home-review-grid">${allReviews.slice(0, 3).map((review) => `
-        <article class="home-review-card"><div class="review-author">${escapeHTML(review.name)}</div><div class="review-stars" aria-label="${review.rating} out of 5 stars">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div><div class="reviews-summary">${escapeHTML(review.productName || 'DESKTOPMAT')}</div><p class="review-text">${escapeHTML(review.comment)}</p>${review.image ? `<img class="review-image" src="${review.image}" alt="Photo shared by ${escapeHTML(review.name)}" />` : ''}</article>
+        <article class="home-review-card"><div class="review-author">${escapeHTML(privateName(review.name))}</div><div class="review-stars" aria-label="${review.rating} out of 5 stars">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div><div class="reviews-summary">${escapeHTML(review.productName || 'DESKTOPMAT')}</div><p class="review-text">${escapeHTML(review.comment)}</p>${review.image ? `<img class="review-image" src="${review.image}" alt="Photo shared by customer" />` : ''}</article>
       `).join('')}</div>
     </section>
   `;
