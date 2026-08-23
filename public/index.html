@@ -59,11 +59,11 @@
   }
   .header-inner {
     display: flex; align-items: center; justify-content: space-between;
-    height: 72px; max-width: none; padding: 0 clamp(24px, 5.3vw, 80px);
+    height: 72px; max-width: none; padding: 0 clamp(24px, 5.3vw, 80px); position: relative;
   }
   .logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-head); font-weight: 800; font-size: 18px; letter-spacing: -0.01em; }
   .logo-box { width: 44px; height: 44px; object-fit: contain; }
-  .nav-links { display: flex; gap: 32px; }
+  .nav-links { display: flex; gap: 32px; position: absolute; left: 50%; transform: translateX(-50%); }
   .nav-links button { font-size: 14px; font-weight: 600; color: var(--text); }
   .nav-links button:hover { color: var(--accent); }
   .header-actions { display: flex; align-items: center; gap: 18px; }
