@@ -143,7 +143,6 @@ function renderHome() {
           <button class="btn btn-outline" onclick="go('shop')">Browse sizes</button>
         </div>
       </div>
-      <img class="hero-visual" src="/Images/Default%20Mat/Mat(5).png" alt="DESKTOPMAT desk mat" />
     </section>
 
     <section class="section">
