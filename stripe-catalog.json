@@ -1,0 +1,338 @@
+{
+  "light-purple": {
+    "stripeProductName": "Light Purple Desktop Mat",
+    "displayName": "Light Purple",
+    "productId": "prod_V6SBWYoebVa8ld",
+    "prices": {
+      "60 × 35 cm": "price_1U6FGlFVjkiMlGd8rhKjg98t",
+      "120 × 50 cm": "price_1U6FL7FVjkiMlGd8b39Z2IWD",
+      "90 × 43 cm": "price_1U6FL7FVjkiMlGd8LXro6KY8",
+      "100 × 50 cm": "price_1U6FL7FVjkiMlGd8XWcfM2Lv",
+      "80 × 40 cm": "price_1U6FL7FVjkiMlGd8e6nRQ7Pz"
+    }
+  },
+  "pale-mauve": {
+    "stripeProductName": "Pale Mauve Desktop Mat",
+    "displayName": "Pale Mauve",
+    "productId": "prod_V6SAv5SNzVDNzl",
+    "prices": {
+      "60 × 35 cm": "price_1U6FGBFVjkiMlGd8Lpaecp8h",
+      "120 × 50 cm": "price_1U6FODFVjkiMlGd8lqB1ABVn",
+      "90 × 43 cm": "price_1U6FODFVjkiMlGd893SA6IoV",
+      "100 × 50 cm": "price_1U6FODFVjkiMlGd8k83WCm3Q",
+      "80 × 40 cm": "price_1U6FODFVjkiMlGd8bX4Cel1R"
+    }
+  },
+  "pink": {
+    "stripeProductName": "Pink Desktop Mat",
+    "displayName": "Pink",
+    "productId": "prod_V6S973TORqkwom",
+    "prices": {
+      "60 × 35 cm": "price_1U6FFTFVjkiMlGd8VDbPyf1y",
+      "120 × 50 cm": "price_1U6FQqFVjkiMlGd81z5qqRNH",
+      "90 × 43 cm": "price_1U6FQqFVjkiMlGd86VcluwdX",
+      "100 × 50 cm": "price_1U6FSBFVjkiMlGd8rhhiLCPz",
+      "80 × 40 cm": "price_1U6FSBFVjkiMlGd8oYrqLSgL"
+    }
+  },
+  "light-pink": {
+    "stripeProductName": "Light Pink Desktop Mat",
+    "displayName": "Light Pink",
+    "productId": "prod_V6S9qc4Trau4DH",
+    "prices": {
+      "60 × 35 cm": "price_1U6FF5FVjkiMlGd8CMkAklxH",
+      "120 × 50 cm": "price_1U6FwXFVjkiMlGd8tWZzCMRK",
+      "90 × 43 cm": "price_1U6FwXFVjkiMlGd8YsxDbR9d",
+      "100 × 50 cm": "price_1U6FwXFVjkiMlGd8JYt91bUy",
+      "80 × 40 cm": "price_1U6FwXFVjkiMlGd8jmNn6gzP"
+    }
+  },
+  "grayish-lavender": {
+    "stripeProductName": "Grayish Lavender Desktop Mat",
+    "displayName": "Grayish Lavender",
+    "productId": "prod_V6S8wiDXUmYMC0",
+    "prices": {
+      "60 × 35 cm": "price_1U6FEXFVjkiMlGd8BKuBJIa8",
+      "120 × 50 cm": "price_1U6FxXFVjkiMlGd8EruaCUAu",
+      "90 × 43 cm": "price_1U6FxXFVjkiMlGd8ada1uGzA",
+      "100 × 50 cm": "price_1U6FxXFVjkiMlGd8gVPXXsW5",
+      "80 × 40 cm": "price_1U6FxXFVjkiMlGd83bnus7AI"
+    }
+  },
+  "chocolate": {
+    "stripeProductName": "Chocolate Desktop Mat",
+    "displayName": "Chocolate",
+    "productId": "prod_V6S7HVsBAePxAy",
+    "prices": {
+      "60 × 35 cm": "price_1U6FCtFVjkiMlGd8VYsTmRXL",
+      "120 × 50 cm": "price_1U6FyeFVjkiMlGd8f6Em9rJT",
+      "90 × 43 cm": "price_1U6FyeFVjkiMlGd87IHgUI5q",
+      "100 × 50 cm": "price_1U6FyeFVjkiMlGd8pupHSTER",
+      "80 × 40 cm": "price_1U6FyeFVjkiMlGd8m3mFD8vR"
+    }
+  },
+  "brown": {
+    "stripeProductName": "Brown Desktop Mat",
+    "displayName": "Brown",
+    "productId": "prod_V6S6lMMJJuNodW",
+    "prices": {
+      "60 × 35 cm": "price_1U6FCYFVjkiMlGd8mpki7Ghg",
+      "120 × 50 cm": "price_1U6G00FVjkiMlGd8bYrccyRC",
+      "90 × 43 cm": "price_1U6G00FVjkiMlGd8QCgbJaWi",
+      "100 × 50 cm": "price_1U6G00FVjkiMlGd8kxS4dqD4",
+      "80 × 40 cm": "price_1U6G00FVjkiMlGd8JnMJkzgE"
+    }
+  },
+  "bronze": {
+    "stripeProductName": "Bronze Desktop Mat",
+    "displayName": "Bronze",
+    "productId": "prod_V6S68d2KUbVTMe",
+    "prices": {
+      "60 × 35 cm": "price_1U6FCDFVjkiMlGd8izIHhXEH",
+      "120 × 50 cm": "price_1U6G0yFVjkiMlGd8Afvvm0MX",
+      "90 × 43 cm": "price_1U6G0yFVjkiMlGd8Y2E0Hd8b",
+      "100 × 50 cm": "price_1U6G0yFVjkiMlGd86KhJRR4t",
+      "80 × 40 cm": "price_1U6G0yFVjkiMlGd8gEdEEp9u"
+    }
+  },
+  "khaki": {
+    "stripeProductName": "Khaki Desktop Mat",
+    "displayName": "Khaki",
+    "productId": "prod_V6S5EVwBc9i3zy",
+    "prices": {
+      "60 × 35 cm": "price_1U6FBfFVjkiMlGd8dWQGDhst",
+      "120 × 50 cm": "price_1U6G2BFVjkiMlGd8QzKDrdYy",
+      "90 × 43 cm": "price_1U6G2AFVjkiMlGd8NnbrJL9g",
+      "100 × 50 cm": "price_1U6G2BFVjkiMlGd8GSfHgRk2",
+      "80 × 40 cm": "price_1U6G2BFVjkiMlGd8NE5n5XSo"
+    }
+  },
+  "latte": {
+    "stripeProductName": "Latte Desktop Mat",
+    "displayName": "Latte",
+    "productId": "prod_V6S5QdT8iD8Zb2",
+    "prices": {
+      "60 × 35 cm": "price_1U6FAyFVjkiMlGd8EhB3go26",
+      "120 × 50 cm": "price_1U6G3YFVjkiMlGd8CdVKpNsE",
+      "90 × 43 cm": "price_1U6G3YFVjkiMlGd8DsgrpVvx",
+      "100 × 50 cm": "price_1U6G3YFVjkiMlGd8MGh60ofR",
+      "80 × 40 cm": "price_1U6G3YFVjkiMlGd8vr91CZm4"
+    }
+  },
+  "eggshell": {
+    "stripeProductName": "Eggshell Desktop Mat",
+    "displayName": "Eggshell",
+    "productId": "prod_V6S4lwJMGAL5wP",
+    "prices": {
+      "60 × 35 cm": "price_1U6FARFVjkiMlGd8SjFoxvCl",
+      "120 × 50 cm": "price_1U6G65FVjkiMlGd8jp2k2D0F",
+      "90 × 43 cm": "price_1U6G65FVjkiMlGd8ZWhFauRS",
+      "100 × 50 cm": "price_1U6G65FVjkiMlGd8inINxjoM",
+      "80 × 40 cm": "price_1U6G65FVjkiMlGd8CSrlrVt8"
+    }
+  },
+  "cream": {
+    "stripeProductName": "Cream Desktop Mat",
+    "displayName": "Cream",
+    "productId": "prod_V6S4DjvZVHsmxN",
+    "prices": {
+      "60 × 35 cm": "price_1U6FA7FVjkiMlGd8U0pF7j2t",
+      "120 × 50 cm": "price_1U6G7UFVjkiMlGd8ER5159TZ",
+      "90 × 43 cm": "price_1U6G7UFVjkiMlGd8iCgtVp8r",
+      "100 × 50 cm": "price_1U6G7UFVjkiMlGd8vjIGCwUr",
+      "80 × 40 cm": "price_1U6G7UFVjkiMlGd8MWT1F69D"
+    }
+  },
+  "dark-blue": {
+    "stripeProductName": "Dark Blue Desktop Mat",
+    "displayName": "Dark Blue",
+    "productId": "prod_V6S3y64lPGC5sL",
+    "prices": {
+      "60 × 35 cm": "price_1U6F9FFVjkiMlGd86CW5wKYQ",
+      "120 × 50 cm": "price_1U6G8qFVjkiMlGd8wbCph5Po",
+      "90 × 43 cm": "price_1U6G8qFVjkiMlGd8WX7j6qj5",
+      "100 × 50 cm": "price_1U6G8qFVjkiMlGd8kG7Xz3Cj",
+      "80 × 40 cm": "price_1U6G8qFVjkiMlGd8hDY4ZAfO"
+    }
+  },
+  "ice-blue": {
+    "stripeProductName": "Ice Blue Desktop Mat",
+    "displayName": "Ice Blue",
+    "productId": "prod_V6S22yeisaatHG",
+    "prices": {
+      "60 × 35 cm": "price_1U6F8qFVjkiMlGd8BlF2Mhop",
+      "120 × 50 cm": "price_1U6G9oFVjkiMlGd8a7SM1L6s",
+      "90 × 43 cm": "price_1U6G9oFVjkiMlGd8BzeWzYO8",
+      "100 × 50 cm": "price_1U6G9oFVjkiMlGd8xu0ZrxLy",
+      "80 × 40 cm": "price_1U6G9oFVjkiMlGd8uddXTWmH"
+    }
+  },
+  "baby-blue": {
+    "stripeProductName": "Baby Blue Desktop Mat",
+    "displayName": "Baby Blue",
+    "productId": "prod_V6S2qISncY4NZ7",
+    "prices": {
+      "60 × 35 cm": "price_1U6F8ZFVjkiMlGd8AGcFBZFs",
+      "120 × 50 cm": "price_1U6GB7FVjkiMlGd8a2AUqklL",
+      "90 × 43 cm": "price_1U6GB7FVjkiMlGd8euaKKksi",
+      "100 × 50 cm": "price_1U6GB7FVjkiMlGd8wClYLcJZ",
+      "80 × 40 cm": "price_1U6GB7FVjkiMlGd8krKVFaCX"
+    }
+  },
+  "dark-green": {
+    "stripeProductName": "Dark Green Desktop Mat",
+    "displayName": "Dark Green",
+    "productId": "prod_V6S1igvsso5Xy4",
+    "prices": {
+      "60 × 35 cm": "price_1U6F7fFVjkiMlGd8Mx6cGi0w",
+      "120 × 50 cm": "price_1U6GC4FVjkiMlGd8KwAlnam6",
+      "90 × 43 cm": "price_1U6GC4FVjkiMlGd8ZQ9KTX8m",
+      "100 × 50 cm": "price_1U6GC4FVjkiMlGd8znpLifeh",
+      "80 × 40 cm": "price_1U6GC4FVjkiMlGd8F6Fs52DJ"
+    }
+  },
+  "jade-green": {
+    "stripeProductName": "Jade Green Desktop Mat",
+    "displayName": "Jade Green",
+    "productId": "prod_V6S1PjS2mVjYjG",
+    "prices": {
+      "60 × 35 cm": "price_1U6F7PFVjkiMlGd8NxW37wz0",
+      "120 × 50 cm": "price_1U6GDLFVjkiMlGd85d3rQqbF",
+      "90 × 43 cm": "price_1U6GDLFVjkiMlGd8ApykX6RI",
+      "100 × 50 cm": "price_1U6GDLFVjkiMlGd8KRozaosA",
+      "80 × 40 cm": "price_1U6GCZFVjkiMlGd8CAOHLtzx"
+    }
+  },
+  "green": {
+    "stripeProductName": "Green Desktop Mat",
+    "displayName": "Green",
+    "productId": "prod_V6S1KSmzMhL0jf",
+    "prices": {
+      "60 × 35 cm": "price_1U6F74FVjkiMlGd8wKxCHYPh",
+      "120 × 50 cm": "price_1U6GEQFVjkiMlGd8pzOfD2cT",
+      "90 × 43 cm": "price_1U6GEQFVjkiMlGd8snLFz7ba",
+      "100 × 50 cm": "price_1U6GEQFVjkiMlGd8PQnMHSBa",
+      "80 × 40 cm": "price_1U6GEQFVjkiMlGd8pr4MFK74"
+    }
+  },
+  "peak-green": {
+    "stripeProductName": "Peak Green Desktop Mat",
+    "displayName": "Peak Green",
+    "productId": "prod_V6S0Bl08buj9YS",
+    "prices": {
+      "60 × 35 cm": "price_1U6F6cFVjkiMlGd8uVL6mu86",
+      "120 × 50 cm": "price_1U6GFIFVjkiMlGd8bJgidgOB",
+      "90 × 43 cm": "price_1U6GFIFVjkiMlGd8cOoJX3mO",
+      "100 × 50 cm": "price_1U6GFIFVjkiMlGd823bLKxON",
+      "80 × 40 cm": "price_1U6GFIFVjkiMlGd8MKoGzvXg"
+    }
+  },
+  "pale-green": {
+    "stripeProductName": "Pale Green Desktop Mat",
+    "displayName": "Pale Green",
+    "productId": "prod_V6S0I0g87u0emA",
+    "prices": {
+      "60 × 35 cm": "price_1U6F66FVjkiMlGd8S3gZ036d",
+      "120 × 50 cm": "price_1U6GG4FVjkiMlGd8P1HH7QbR",
+      "90 × 43 cm": "price_1U6GG4FVjkiMlGd8ezgN2nRY",
+      "100 × 50 cm": "price_1U6GG4FVjkiMlGd8mKNIcpOa",
+      "80 × 40 cm": "price_1U6GG4FVjkiMlGd8CVOjeV4v"
+    }
+  },
+  "sage-green": {
+    "stripeProductName": "Sage Green Desktop Mat",
+    "displayName": "Sage Green",
+    "productId": "prod_V6Rz4QnUavu233",
+    "prices": {
+      "60 × 35 cm": "price_1U6F5CFVjkiMlGd8MMFzOaZF",
+      "120 × 50 cm": "price_1U6GGxFVjkiMlGd8Nl8xm2ig",
+      "90 × 43 cm": "price_1U6GGxFVjkiMlGd8wg7SZJuF",
+      "100 × 50 cm": "price_1U6GGxFVjkiMlGd8zekcc3Ks",
+      "80 × 40 cm": "price_1U6GGxFVjkiMlGd8fRJ2Uj1p"
+    }
+  },
+  "grayish-green": {
+    "stripeProductName": "Grayish Green Desktop Mat",
+    "displayName": "Grayish Green",
+    "productId": "prod_V6Ry0XdSRg4j3W",
+    "prices": {
+      "60 × 35 cm": "price_1U6F4pFVjkiMlGd82iOTglBL",
+      "120 × 50 cm": "price_1U6GHwFVjkiMlGd8vFQ9oSCB",
+      "90 × 43 cm": "price_1U6GHwFVjkiMlGd87RnuFUnP",
+      "100 × 50 cm": "price_1U6GHwFVjkiMlGd8BE0mY8uF",
+      "80 × 40 cm": "price_1U6GHwFVjkiMlGd8N3AE6uzK"
+    }
+  },
+  "gray": {
+    "stripeProductName": "Gray Desktop Mat",
+    "displayName": "Gray",
+    "productId": "prod_V6RxtFx62zf0r9",
+    "prices": {
+      "60 × 35 cm": "price_1U6F3IFVjkiMlGd8YaYA0pZw",
+      "120 × 50 cm": "price_1U6GIjFVjkiMlGd8Z45cZLXt",
+      "90 × 43 cm": "price_1U6GIjFVjkiMlGd8gOAjtD4t",
+      "100 × 50 cm": "price_1U6GIjFVjkiMlGd8CRH18Gex",
+      "80 × 40 cm": "price_1U6GIjFVjkiMlGd8ptFEYfEd"
+    }
+  },
+  "light-gray": {
+    "stripeProductName": "Light Gray Desktop Mat",
+    "displayName": "Light Gray",
+    "productId": "prod_V6Rw6IcvsAi8HD",
+    "prices": {
+      "60 × 35 cm": "price_1U6F2dFVjkiMlGd8YZgZ2S7u",
+      "120 × 50 cm": "price_1U6GJYFVjkiMlGd8Oaz3FomE",
+      "90 × 43 cm": "price_1U6GJYFVjkiMlGd8aXie4i3K",
+      "100 × 50 cm": "price_1U6GJYFVjkiMlGd8SF9I1no1",
+      "80 × 40 cm": "price_1U6GJYFVjkiMlGd8FaWIV7zz"
+    }
+  },
+  "silver": {
+    "stripeProductName": "Silver Desktop Mat",
+    "displayName": "Silver",
+    "productId": "prod_V6Rvm2fnjcIi8k",
+    "prices": {
+      "60 × 35 cm": "price_1U6F1iFVjkiMlGd8sTJTks8d",
+      "120 × 50 cm": "price_1U6GKKFVjkiMlGd84TalaqML",
+      "90 × 43 cm": "price_1U6GKKFVjkiMlGd8SYNDZ9lU",
+      "100 × 50 cm": "price_1U6GKKFVjkiMlGd8XVI4v7Pf",
+      "80 × 40 cm": "price_1U6GKKFVjkiMlGd89QOI6UJy"
+    }
+  },
+  "white": {
+    "stripeProductName": "White Desktop Mat",
+    "displayName": "White",
+    "productId": "prod_V6RvFckiPs0TGP",
+    "prices": {
+      "60 × 35 cm": "price_1U6F1GFVjkiMlGd8nyVANVO9",
+      "120 × 50 cm": "price_1U6GL2FVjkiMlGd8x2UBKokr",
+      "90 × 43 cm": "price_1U6GL2FVjkiMlGd8Ck4tMVft",
+      "100 × 50 cm": "price_1U6GL2FVjkiMlGd8R6umUaKx",
+      "80 × 40 cm": "price_1U6GL2FVjkiMlGd8nkpF5ei6"
+    }
+  },
+  "black": {
+    "stripeProductName": "Black Desktop Mat",
+    "displayName": "Black",
+    "productId": "prod_V7gqiCpvavsouc",
+    "prices": {
+      "60 × 35 cm": "price_1U7RSRFVjkiMlGd87IEcJQTq",
+      "120 × 50 cm": "price_1U7RSRFVjkiMlGd809mEy6gK",
+      "90 × 43 cm": "price_1U7RSRFVjkiMlGd8raYuZ9CE",
+      "100 × 50 cm": "price_1U7RSRFVjkiMlGd8EOiDKZzQ",
+      "80 × 40 cm": "price_1U7RSRFVjkiMlGd80LzVAeAZ"
+    }
+  },
+  "dark-gray": {
+    "stripeProductName": "Dark Gray Desktop Mat",
+    "displayName": "Dark Gray",
+    "productId": "prod_V7gtB7ThsCiO39",
+    "prices": {
+      "60 × 35 cm": "price_1U7RVrFVjkiMlGd8M6swHBK2",
+      "120 × 50 cm": "price_1U7RVrFVjkiMlGd8AaOueW3T",
+      "90 × 43 cm": "price_1U7RVrFVjkiMlGd8ThxCtYYB",
+      "100 × 50 cm": "price_1U7RVrFVjkiMlGd8COUXQNXg",
+      "80 × 40 cm": "price_1U7RVrFVjkiMlGd8RSWwucIU"
+    }
+  }
+}
