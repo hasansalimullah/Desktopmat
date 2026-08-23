@@ -13,6 +13,7 @@ let checkoutState = {
 };
 const SAVED_INFO_KEY = 'desktopmat_checkout_info';
 const NEWSLETTER_SIGNUP_KEY = 'desktopmat_newsletter_signup';
+const NEWSLETTER_DISMISSED_KEY = 'desktopmat_newsletter_dismissed';
 
 const METALLIC_PRODUCT_IDS = new Set(['bronze', 'silver']);
 const FREE_SHIPPING_CODE = 'ONLYIKNOW';
@@ -158,12 +159,12 @@ function renderHome() {
     <section class="newsletter-section">
       <div>
         <span class="eyebrow">DESKTOPMAT NOTES</span>
-        <h2>Join the list. Get 10% off.</h2>
+        <h2>Join the DESKTOPMAT list.</h2>
         <p>New colors, desk setups, and occasional offers.</p>
       </div>
       <form id="newsletter-form" onsubmit="signUpNewsletter(event)">
         <input id="newsletter-email" type="email" autocomplete="email" placeholder="Email address" required />
-        <button class="btn btn-black" type="submit">Get WELCOME10</button>
+        <button class="btn btn-black" type="submit">Join newsletter</button>
       </form>
     </section>
   `;
@@ -446,15 +447,23 @@ async function signUpNewsletter(event) {
 window.signUpNewsletter = signUpNewsletter;
 
 function showNewsletterModal() {
-  if (localStorage.getItem(NEWSLETTER_SIGNUP_KEY) || sessionStorage.getItem('desktopmat_newsletter_dismissed')) return;
-  document.getElementById('newsletter-modal-root').innerHTML = '<div class="newsletter-modal-backdrop" onclick="dismissNewsletter(event)"><section class="newsletter-modal" onclick="event.stopPropagation()"><button class="newsletter-close" aria-label="Close" onclick="dismissNewsletter()">×</button><span class="eyebrow">A SMALL WELCOME</span><h2>Get 10% off your first order.</h2><p>Sign up for occasional DESKTOPMAT notes and receive the WELCOME10 code by email.</p><form id="newsletter-modal-form" onsubmit="signUpNewsletter(event)"><input id="newsletter-email" type="email" autocomplete="email" placeholder="Email address" required /><button class="btn btn-black" type="submit">Send my code</button></form></section></div>';
+  if (localStorage.getItem(NEWSLETTER_SIGNUP_KEY) || localStorage.getItem(NEWSLETTER_DISMISSED_KEY)) return;
+  document.getElementById('newsletter-modal-root').innerHTML = '<div class="newsletter-modal-backdrop" onclick="dismissNewsletter(event)"><section class="newsletter-modal" onclick="event.stopPropagation()"><button class="newsletter-close" aria-label="Close" onclick="dismissNewsletter()">×</button><span class="eyebrow">A SMALL WELCOME</span><h2>Join the DESKTOPMAT list.</h2><p>Sign up for occasional DESKTOPMAT notes. Subscribers receive a welcome offer by email.</p><form id="newsletter-modal-form" onsubmit="signUpNewsletter(event)"><input id="newsletter-modal-email" type="email" autocomplete="email" placeholder="Email address" required /><button class="btn btn-black" type="submit">Join newsletter</button></form></section></div>';
 }
 function dismissNewsletter(event) {
   if (event && event.target !== event.currentTarget) return;
-  sessionStorage.setItem('desktopmat_newsletter_dismissed', '1');
+  localStorage.setItem(NEWSLETTER_DISMISSED_KEY, '1');
   document.getElementById('newsletter-modal-root').innerHTML = '';
+  document.getElementById('newsletter-reopen').hidden = false;
 }
 window.dismissNewsletter = dismissNewsletter;
+
+function reopenNewsletter() {
+  localStorage.removeItem(NEWSLETTER_DISMISSED_KEY);
+  document.getElementById('newsletter-reopen').hidden = true;
+  showNewsletterModal();
+}
+window.reopenNewsletter = reopenNewsletter;
 
 function updateCartBadge() {
   const count = cart.reduce((n, c) => n + c.qty, 0);
@@ -810,6 +819,7 @@ window.toggleMobileNav = toggleMobileNav;
     renderConfirmation(sessionId);
   } else {
     renderHome();
+    document.getElementById('newsletter-reopen').hidden = !localStorage.getItem(NEWSLETTER_DISMISSED_KEY);
     setTimeout(showNewsletterModal, 9000);
   }
   updateCartBadge();

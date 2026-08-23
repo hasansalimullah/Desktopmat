@@ -61,7 +61,7 @@
     height: 72px;
   }
   .logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-head); font-weight: 800; font-size: 18px; letter-spacing: -0.01em; }
-  .logo-box { width: 34px; height: 34px; }
+  .logo-box { width: 44px; height: 44px; object-fit: contain; }
   .nav-links { display: flex; gap: 32px; }
   .nav-links button { font-size: 14px; font-weight: 600; color: var(--text); }
   .nav-links button:hover { color: var(--accent); }
@@ -278,6 +278,7 @@
   .newsletter-modal form { display: flex; gap: 8px; margin-top: 22px; }
   .newsletter-modal input { flex: 1; min-width: 0; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--r-sm); font: inherit; }
   .newsletter-close { position: absolute; right: 16px; top: 14px; font-size: 22px; color: var(--text-muted); }
+  .newsletter-reopen { position: fixed; right: 0; top: 42%; z-index: 99; padding: 14px 10px; writing-mode: vertical-rl; background: var(--text); color: white; border-radius: 8px 0 0 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; }
   @media (max-width: 700px) { .newsletter-section { display: block; } .newsletter-section form { margin-top: 20px; min-width: 0; } }
 </style>
 </head>
@@ -365,6 +366,7 @@
 </footer>
 
 <div id="newsletter-modal-root"></div>
+<button id="newsletter-reopen" class="newsletter-reopen" hidden onclick="reopenNewsletter()">Newsletter</button>
 
 <script src="app.js"></script>
 </body>
