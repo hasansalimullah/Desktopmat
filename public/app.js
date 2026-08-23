@@ -64,6 +64,7 @@ function startingPrice(product) {
 
 function storefrontProducts() {
   const colored = PRODUCTS.filter((p) => !METALLIC_PRODUCT_IDS.has(p.id));
+  const testing = PRODUCTS.find((p) => p.id === 'testing');
   return [{
     ...colored[0],
     id: 'colored-mat',
@@ -73,7 +74,7 @@ function storefrontProducts() {
     desc: 'The DESKTOPMAT in the finish you choose. A smooth, low-friction surface with stitched edges and a non-slip base for everyday typing, mousing, and writing.',
     variants: colored,
     gallery: DEFAULT_MAT_IMAGES,
-  }, ...PRODUCTS.filter((p) => METALLIC_PRODUCT_IDS.has(p.id))];
+  }, ...(testing ? [{ ...testing, tag: 'TEST' }] : []), ...PRODUCTS.filter((p) => METALLIC_PRODUCT_IDS.has(p.id))];
 }
 
 function productImage(product) {
