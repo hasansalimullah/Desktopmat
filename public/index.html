@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>DESKTOPMAT — Minimal desk mats</title>
+<link rel="icon" type="image/png" href="/Images/logo(white).png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
@@ -60,7 +61,7 @@
     height: 72px;
   }
   .logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-head); font-weight: 800; font-size: 18px; letter-spacing: -0.01em; }
-  .logo-box { width: 26px; height: 26px; }
+  .logo-box { width: 34px; height: 34px; }
   .nav-links { display: flex; gap: 32px; }
   .nav-links button { font-size: 14px; font-weight: 600; color: var(--text); }
   .nav-links button:hover { color: var(--accent); }
@@ -269,7 +270,14 @@
   .eyebrow { color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; }
   .info-page { max-width: 680px; margin: 80px auto; padding: 0 20px; }
   .info-page h1 { font-size: 36px; margin: 12px 0; }
-  .info-page p { color: var(--text-muted); line-height: 1.7; margin-bottom: 24px; }
+  .info-page p { color: var(--text-muted); line-height: 1.8; margin-bottom: 20px; }
+  .newsletter-modal-backdrop { position: fixed; inset: 0; background: rgba(11,18,32,0.45); z-index: 100; display: flex; align-items: center; justify-content: center; padding: 20px; }
+  .newsletter-modal { max-width: 520px; width: 100%; background: white; border-radius: var(--r-lg); padding: 34px; box-shadow: var(--shadow-lg); position: relative; }
+  .newsletter-modal h2 { font-size: 28px; margin: 10px 0 8px; }
+  .newsletter-modal p { color: var(--text-muted); line-height: 1.6; }
+  .newsletter-modal form { display: flex; gap: 8px; margin-top: 22px; }
+  .newsletter-modal input { flex: 1; min-width: 0; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--r-sm); font: inherit; }
+  .newsletter-close { position: absolute; right: 16px; top: 14px; font-size: 22px; color: var(--text-muted); }
   @media (max-width: 700px) { .newsletter-section { display: block; } .newsletter-section form { margin-top: 20px; min-width: 0; } }
 </style>
 </head>
@@ -278,11 +286,13 @@
 <header>
   <div class="wrap header-inner">
     <a class="logo" href="#" onclick="go('home');return false;">
+      <img class="logo-box" src="/Images/logo(black).png" alt="" />
+      <!--
       <svg class="logo-box" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 2L21 7V17L12 22L3 17V7L12 2Z" stroke="#0F1729" stroke-width="1.6" stroke-linejoin="round"/>
         <path d="M3 7L12 12L21 7" stroke="#0F1729" stroke-width="1.6" stroke-linejoin="round"/>
         <path d="M12 12V22" stroke="#0F1729" stroke-width="1.6" stroke-linejoin="round"/>
-      </svg>
+      </svg> -->
       DESKTOPMAT
     </a>
     <nav class="nav-links">
@@ -353,6 +363,8 @@
     </div>
   </div>
 </footer>
+
+<div id="newsletter-modal-root"></div>
 
 <script src="app.js"></script>
 </body>

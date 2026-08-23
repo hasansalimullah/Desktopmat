@@ -13,6 +13,14 @@ const FREE_SHIPPING_THRESHOLD = 75;
 const FREE_SHIPPING_CODE = 'ONLYIKNOW';
 const WELCOME_DISCOUNT_CODE = 'WELCOME10';
 
+async function getWelcomePromotionCode(stripe) {
+  const existing = await stripe.promotionCodes.list({ code: WELCOME_DISCOUNT_CODE, active: true, limit: 1 });
+  if (existing.data[0]) return existing.data[0].id;
+  const coupon = await stripe.coupons.create({ percent_off: 10, duration: 'once', name: WELCOME_DISCOUNT_CODE });
+  const promotion = await stripe.promotionCodes.create({ coupon: coupon.id, code: WELCOME_DISCOUNT_CODE });
+  return promotion.id;
+}
+
 function centsFromDollars(amount) {
   return Math.round(amount * 100);
 }
@@ -74,9 +82,7 @@ module.exports = async function handler(req, res) {
     const domain = process.env.DOMAIN || `https://${req.headers.host}`;
     const trackingNumber = `DM-${crypto.randomBytes(5).toString('hex').toUpperCase()}`;
     const welcomeDiscount = normalizePromoCode(promoCode) === WELCOME_DISCOUNT_CODE;
-    const discounts = welcomeDiscount
-      ? [{ coupon: (await stripe.coupons.create({ percent_off: 10, duration: 'once', name: WELCOME_DISCOUNT_CODE })).id }]
-      : undefined;
+    const discounts = welcomeDiscount ? [{ promotion_code: await getWelcomePromotionCode(stripe) }] : undefined;
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       line_items,

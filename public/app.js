@@ -171,14 +171,14 @@ function renderHome() {
 
 function renderInfoPage(page) {
   const pages = {
-    contact: ['Contact', 'Questions about an order? Email desktopmatinfo@gmail.com.'],
-    shipping: ['Shipping', 'Orders are prepared promptly. Shipping options and delivery estimates are shown at checkout.'],
-    returns: ['Returns', 'Contact desktopmatinfo@gmail.com about a return request and include your order reference.'],
-    about: ['About DESKTOPMAT', 'Thoughtful desk mats for focused work and calmer setups.'],
-    sustainability: ['Sustainability', 'We keep the product line focused and packaging simple to reduce unnecessary waste.'],
+    contact: ['Contact', ['Need help with an order, product question, or checkout issue? Email desktopmatinfo@gmail.com and include your order reference when one is available. We read every message and use the details you provide only to help with your request.', 'For questions about colors, sizes, shipping estimates, or returns, tell us what you were looking at and what you need. A clear subject and a short description help us respond more quickly.', 'We aim to reply within two business days. Please do not email payment card numbers, passwords, or secret API keys.']],
+    shipping: ['Shipping', ['Every order is prepared after checkout and shipped to the address entered during payment. Available shipping methods, prices, and estimated delivery windows appear before you confirm the order.', 'Standard, express, and overnight options may be available depending on the destination and current fulfillment capacity. Orders that qualify for free shipping will show the shipping charge as free before you continue to Stripe Checkout.', 'After an order is placed, keep the order reference shown on the confirmation page. It helps us locate your purchase if you need support. Carrier tracking details are provided separately once a package has actually shipped.']],
+    returns: ['Returns', ['We want your desk setup to feel right. If you need to request a return, email desktopmatinfo@gmail.com with your order reference, the item you want to return, and a brief explanation of the issue.', 'Please contact us before mailing anything back so we can confirm the correct return instructions. Items should be unused and protected during transit whenever possible. Return eligibility can depend on the condition of the product and the timing of the request.', 'Once an approved return is received and checked, we will explain the next step for the refund or replacement. Original shipping charges may not be refundable unless the item arrived damaged or there was an error with the order.']],
+    about: ['About DESKTOPMAT', ['DESKTOPMAT makes desk mats for people who care about the surface beneath their work. The goal is simple: a smooth, stable place for a keyboard, mouse, notebook, and the small rituals that make focused work easier.', 'The collection is intentionally restrained. Instead of overwhelming you with features, we focus on useful sizes, calm colors, stitched edges, and a low-friction surface that works through long sessions at a desk.', 'We are building the store carefully, one improvement at a time. That includes clearer product information, dependable checkout behavior, and support that treats every order as more than a transaction.']],
+    sustainability: ['Sustainability', ['We try to keep the product line focused so materials, packaging, and fulfillment decisions stay understandable. A smaller, considered collection is easier to manage than a constant cycle of unnecessary variations.', 'Packaging is kept as simple as practical while still protecting the mat during transit. We are also working toward clearer information about materials and fulfillment so customers can make decisions with useful context rather than vague promises.', 'Sustainability is ongoing work, not a label we consider finished. As the store grows, we will continue looking for ways to reduce excess packaging, avoid avoidable waste, and make improvements that hold up beyond the product page.']],
   };
-  const [title, copy] = pages[page] || pages.about;
-  app.innerHTML = `<section class="info-page"><span class="eyebrow">DESKTOPMAT</span><h1>${title}</h1><p>${copy}</p><button class="btn btn-primary" onclick="go('shop')">Shop all colors</button></section>`;
+  const [title, paragraphs] = pages[page] || pages.about;
+  app.innerHTML = `<section class="info-page"><span class="eyebrow">DESKTOPMAT</span><h1>${title}</h1>${paragraphs.map((paragraph) => `<p>${paragraph}</p>`).join('')}<button class="btn btn-primary" onclick="go('shop')">Shop all colors</button></section>`;
 }
 
 function cardHTML(product) {
@@ -423,14 +423,38 @@ function discountPercent() {
   return normalizePromoCode(checkoutState.promoCode) === WELCOME_DISCOUNT_CODE ? 10 : 0;
 }
 
-function signUpNewsletter(event) {
+async function signUpNewsletter(event) {
   event.preventDefault();
-  const email = document.getElementById('newsletter-email').value.trim().toLowerCase();
+  const email = event.currentTarget.querySelector('input[type="email"]').value.trim().toLowerCase();
   if (!email) return;
-  localStorage.setItem(NEWSLETTER_SIGNUP_KEY, email);
-  document.getElementById('newsletter-form').innerHTML = '<p>Thanks. Your code is <strong>WELCOME10</strong>.</p>';
+  const form = event.currentTarget;
+  const button = form.querySelector('button');
+  button.disabled = true;
+  try {
+    const response = await fetch('/api/newsletter-signup', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email }) });
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.error || 'Signup failed');
+    localStorage.setItem(NEWSLETTER_SIGNUP_KEY, email);
+    localStorage.setItem('desktopmat_welcome_code', WELCOME_DISCOUNT_CODE);
+    form.innerHTML = '<p>Thanks. Check your email for <strong>WELCOME10</strong>.</p>';
+    document.getElementById('newsletter-modal-root').innerHTML = '';
+  } catch (error) {
+    button.disabled = false;
+    alert(error.message);
+  }
 }
 window.signUpNewsletter = signUpNewsletter;
+
+function showNewsletterModal() {
+  if (localStorage.getItem(NEWSLETTER_SIGNUP_KEY) || sessionStorage.getItem('desktopmat_newsletter_dismissed')) return;
+  document.getElementById('newsletter-modal-root').innerHTML = '<div class="newsletter-modal-backdrop" onclick="dismissNewsletter(event)"><section class="newsletter-modal" onclick="event.stopPropagation()"><button class="newsletter-close" aria-label="Close" onclick="dismissNewsletter()">×</button><span class="eyebrow">A SMALL WELCOME</span><h2>Get 10% off your first order.</h2><p>Sign up for occasional DESKTOPMAT notes and receive the WELCOME10 code by email.</p><form id="newsletter-modal-form" onsubmit="signUpNewsletter(event)"><input id="newsletter-email" type="email" autocomplete="email" placeholder="Email address" required /><button class="btn btn-black" type="submit">Send my code</button></form></section></div>';
+}
+function dismissNewsletter(event) {
+  if (event && event.target !== event.currentTarget) return;
+  sessionStorage.setItem('desktopmat_newsletter_dismissed', '1');
+  document.getElementById('newsletter-modal-root').innerHTML = '';
+}
+window.dismissNewsletter = dismissNewsletter;
 
 function updateCartBadge() {
   const count = cart.reduce((n, c) => n + c.qty, 0);
@@ -786,6 +810,7 @@ window.toggleMobileNav = toggleMobileNav;
     renderConfirmation(sessionId);
   } else {
     renderHome();
+    setTimeout(showNewsletterModal, 9000);
   }
   updateCartBadge();
 })();
