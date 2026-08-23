@@ -136,8 +136,8 @@ function renderHome() {
   app.innerHTML = `
     <section class="hero">
       <div>
-        <h1>A calmer desk starts with the surface.</h1>
-        <p>Precision-cut desk mats in 26 colors and 5 sizes. Smooth glide, stitched edges, zero clutter.</p>
+        <h1>Built for focus. Made to last.</h1>
+        <p>Premium desk mats that elevate your space and your workflow.</p>
         <div class="actions">
           <button class="btn btn-primary" onclick="go('shop')">Shop all colors</button>
           <button class="btn btn-outline" onclick="go('shop')">Browse sizes</button>

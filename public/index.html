@@ -120,18 +120,18 @@
   }
   .hero::before { content: ''; position: absolute; z-index: 0; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%); background: white url('/Images/Default%20Mat/background.png') center / cover no-repeat; }
   .hero > div { position: relative; z-index: 1; }
-  .hero h1 { font-size: 44px; line-height: 1.1; max-width: 520px; }
-  .hero p { color: var(--text-muted); margin-top: 16px; max-width: 420px; font-size: 16px; }
+  .hero h1 { font-size: 44px; line-height: 1.1; max-width: 360px; }
+  .hero p { color: var(--text-muted); margin-top: 16px; max-width: 360px; font-size: 16px; }
   .hero .actions { margin-top: 28px; display: flex; gap: 12px; }
   @media (max-width: 900px) {
     .hero { flex-direction: column; text-align: center; padding: 56px 24px; }
-    .hero h1 { font-size: 32px; }
+    .hero h1 { font-size: 32px; max-width: 420px; }
     .hero .actions { justify-content: center; }
     .hero::before { background-size: 100% auto; background-position: top center; }
   }
   @media (max-width: 480px) {
     .hero { margin-bottom: 48px; padding: 40px 20px; }
-    .hero h1 { font-size: 30px; }
+    .hero h1 { font-size: 30px; max-width: 100%; }
     .hero p { font-size: 14px; }
     .hero .actions { flex-direction: column; width: 100%; }
     .hero .actions .btn { width: 100%; }
@@ -308,9 +308,11 @@
       DESKTOPMAT
     </a>
     <nav class="nav-links">
-      <button onclick="go('home')">Home</button>
       <button onclick="go('shop')">Shop</button>
       <button onclick="go('shop')">All Colors</button>
+      <button onclick="go('shop')">Sizes</button>
+      <button onclick="go('info','about')">Info</button>
+      <button onclick="go('home')">Home</button>
     </nav>
     <div class="header-actions">
       <button class="icon-btn" onclick="openSearch()" aria-label="Search">
@@ -336,6 +338,9 @@
   </div>
   <button class="mn-link" onclick="go('home');toggleMobileNav(false);">Home</button>
   <button class="mn-link" onclick="go('shop');toggleMobileNav(false);">Shop</button>
+  <button class="mn-link" onclick="go('shop');toggleMobileNav(false);">All Colors</button>
+  <button class="mn-link" onclick="go('shop');toggleMobileNav(false);">Sizes</button>
+  <button class="mn-link" onclick="go('info','about');toggleMobileNav(false);">Info</button>
   <button class="mn-link" onclick="go('cart');toggleMobileNav(false);">Cart</button>
 </div>
 
