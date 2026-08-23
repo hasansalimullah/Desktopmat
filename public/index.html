@@ -126,13 +126,15 @@
   .hero-badge strong { font-size: 25px; }
   .hero .actions { margin-top: 28px; display: flex; gap: 12px; }
   @media (max-width: 900px) {
-    .hero { flex-direction: column; text-align: center; padding: 56px 24px; }
-    .hero h1 { font-size: 48px; max-width: 420px; }
+    .hero { flex-direction: column; justify-content: center; text-align: center; padding: 128px 24px 56px; }
+    .hero > div { width: 100%; }
+    .hero h1 { font-size: 48px; max-width: 420px; margin-inline: auto; }
+    .hero p { margin-inline: auto; }
     .hero .actions { justify-content: center; }
     .hero { background-position: center; }
   }
   @media (max-width: 480px) {
-    .hero { margin-bottom: 48px; padding: 40px 20px; }
+    .hero { margin-bottom: 48px; padding: 112px 20px 40px; }
     .hero h1 { font-size: 42px; max-width: 100%; }
     .hero p { font-size: 14px; }
     .hero .actions { flex-direction: column; width: 100%; }
