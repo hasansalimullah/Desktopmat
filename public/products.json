@@ -1,0 +1,1038 @@
+[
+  {
+    "id": "light-purple",
+    "name": "Light Purple",
+    "color": "#B6A8D6",
+    "pattern": "p-light-purple",
+    "image": "",
+    "tagline": "Smooth, low-glare light purple finish.",
+    "desc": "The Light Purple DESKTOPMAT — a smooth, low-friction desk mat in a clean light purple finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  },
+  {
+    "id": "pale-mauve",
+    "name": "Pale Mauve",
+    "color": "#C08A93",
+    "pattern": "p-pale-mauve",
+    "image": "",
+    "tagline": "Smooth, low-glare pale mauve finish.",
+    "desc": "The Pale Mauve DESKTOPMAT — a smooth, low-friction desk mat in a clean pale mauve finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  },
+  {
+    "id": "pink",
+    "name": "Pink",
+    "color": "#DB93A0",
+    "pattern": "p-pink",
+    "image": "",
+    "tagline": "Smooth, low-glare pink finish.",
+    "desc": "The Pink DESKTOPMAT — a smooth, low-friction desk mat in a clean pink finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  },
+  {
+    "id": "light-pink",
+    "name": "Light Pink",
+    "color": "#E8C4C4",
+    "pattern": "p-light-pink",
+    "image": "",
+    "tagline": "Smooth, low-glare light pink finish.",
+    "desc": "The Light Pink DESKTOPMAT — a smooth, low-friction desk mat in a clean light pink finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  },
+  {
+    "id": "grayish-lavender",
+    "name": "Grayish Lavender",
+    "color": "#C7BFC3",
+    "pattern": "p-grayish-lavender",
+    "image": "",
+    "tagline": "Smooth, low-glare grayish lavender finish.",
+    "desc": "The Grayish Lavender DESKTOPMAT — a smooth, low-friction desk mat in a clean grayish lavender finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  },
+  {
+    "id": "chocolate",
+    "name": "Chocolate",
+    "color": "#7A6B62",
+    "pattern": "p-chocolate",
+    "image": "",
+    "tagline": "Smooth, low-glare chocolate finish.",
+    "desc": "The Chocolate DESKTOPMAT — a smooth, low-friction desk mat in a clean chocolate finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  },
+  {
+    "id": "brown",
+    "name": "Brown",
+    "color": "#A9673A",
+    "pattern": "p-brown",
+    "image": "",
+    "tagline": "Smooth, low-glare brown finish.",
+    "desc": "The Brown DESKTOPMAT — a smooth, low-friction desk mat in a clean brown finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  },
+  {
+    "id": "bronze",
+    "name": "Bronze",
+    "color": "#A9834F",
+    "pattern": "p-bronze",
+    "image": "",
+    "tagline": "Smooth, low-glare bronze finish.",
+    "desc": "The Bronze DESKTOPMAT — a smooth, low-friction desk mat in a clean bronze finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  },
+  {
+    "id": "khaki",
+    "name": "Khaki",
+    "color": "#B98F5D",
+    "pattern": "p-khaki",
+    "image": "",
+    "tagline": "Smooth, low-glare khaki finish.",
+    "desc": "The Khaki DESKTOPMAT — a smooth, low-friction desk mat in a clean khaki finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  },
+  {
+    "id": "latte",
+    "name": "Latte",
+    "color": "#C9A876",
+    "pattern": "p-latte",
+    "image": "",
+    "tagline": "Smooth, low-glare latte finish.",
+    "desc": "The Latte DESKTOPMAT — a smooth, low-friction desk mat in a clean latte finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  },
+  {
+    "id": "eggshell",
+    "name": "Eggshell",
+    "color": "#C9C2AF",
+    "pattern": "p-eggshell",
+    "image": "",
+    "tagline": "Smooth, low-glare eggshell finish.",
+    "desc": "The Eggshell DESKTOPMAT — a smooth, low-friction desk mat in a clean eggshell finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  },
+  {
+    "id": "cream",
+    "name": "Cream",
+    "color": "#DAD5C7",
+    "pattern": "p-cream",
+    "image": "",
+    "tagline": "Smooth, low-glare cream finish.",
+    "desc": "The Cream DESKTOPMAT — a smooth, low-friction desk mat in a clean cream finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  },
+  {
+    "id": "dark-blue",
+    "name": "Dark Blue",
+    "color": "#2B3648",
+    "pattern": "p-dark-blue",
+    "image": "",
+    "tagline": "Smooth, low-glare dark blue finish.",
+    "desc": "The Dark Blue DESKTOPMAT — a smooth, low-friction desk mat in a clean dark blue finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  },
+  {
+    "id": "ice-blue",
+    "name": "Ice Blue",
+    "color": "#A9C2D6",
+    "pattern": "p-ice-blue",
+    "image": "",
+    "tagline": "Smooth, low-glare ice blue finish.",
+    "desc": "The Ice Blue DESKTOPMAT — a smooth, low-friction desk mat in a clean ice blue finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  },
+  {
+    "id": "baby-blue",
+    "name": "Baby Blue",
+    "color": "#A8C4DC",
+    "pattern": "p-baby-blue",
+    "image": "",
+    "tagline": "Smooth, low-glare baby blue finish.",
+    "desc": "The Baby Blue DESKTOPMAT — a smooth, low-friction desk mat in a clean baby blue finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  },
+  {
+    "id": "dark-green",
+    "name": "Dark Green",
+    "color": "#56675E",
+    "pattern": "p-dark-green",
+    "image": "",
+    "tagline": "Smooth, low-glare dark green finish.",
+    "desc": "The Dark Green DESKTOPMAT — a smooth, low-friction desk mat in a clean dark green finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  },
+  {
+    "id": "jade-green",
+    "name": "Jade Green",
+    "color": "#4F7A5D",
+    "pattern": "p-jade-green",
+    "image": "",
+    "tagline": "Smooth, low-glare jade green finish.",
+    "desc": "The Jade Green DESKTOPMAT — a smooth, low-friction desk mat in a clean jade green finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  },
+  {
+    "id": "green",
+    "name": "Green",
+    "color": "#7FA187",
+    "pattern": "p-green",
+    "image": "",
+    "tagline": "Smooth, low-glare green finish.",
+    "desc": "The Green DESKTOPMAT — a smooth, low-friction desk mat in a clean green finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  },
+  {
+    "id": "peak-green",
+    "name": "Peak Green",
+    "color": "#8FAF6E",
+    "pattern": "p-peak-green",
+    "image": "",
+    "tagline": "Smooth, low-glare peak green finish.",
+    "desc": "The Peak Green DESKTOPMAT — a smooth, low-friction desk mat in a clean peak green finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  },
+  {
+    "id": "pale-green",
+    "name": "Pale Green",
+    "color": "#C8DCC0",
+    "pattern": "p-pale-green",
+    "image": "",
+    "tagline": "Smooth, low-glare pale green finish.",
+    "desc": "The Pale Green DESKTOPMAT — a smooth, low-friction desk mat in a clean pale green finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  },
+  {
+    "id": "sage-green",
+    "name": "Sage Green",
+    "color": "#B6B69F",
+    "pattern": "p-sage-green",
+    "image": "",
+    "tagline": "Smooth, low-glare sage green finish.",
+    "desc": "The Sage Green DESKTOPMAT — a smooth, low-friction desk mat in a clean sage green finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  },
+  {
+    "id": "grayish-green",
+    "name": "Grayish Green",
+    "color": "#A9B8AC",
+    "pattern": "p-grayish-green",
+    "image": "",
+    "tagline": "Smooth, low-glare grayish green finish.",
+    "desc": "The Grayish Green DESKTOPMAT — a smooth, low-friction desk mat in a clean grayish green finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  },
+  {
+    "id": "gray",
+    "name": "Gray",
+    "color": "#8B8B8B",
+    "pattern": "p-gray",
+    "image": "",
+    "tagline": "Smooth, low-glare gray finish.",
+    "desc": "The Gray DESKTOPMAT — a smooth, low-friction desk mat in a clean gray finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  },
+  {
+    "id": "light-gray",
+    "name": "Light Gray",
+    "color": "#A6ADB3",
+    "pattern": "p-light-gray",
+    "image": "",
+    "tagline": "Smooth, low-glare light gray finish.",
+    "desc": "The Light Gray DESKTOPMAT — a smooth, low-friction desk mat in a clean light gray finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  },
+  {
+    "id": "silver",
+    "name": "Silver",
+    "color": "#D3D3D3",
+    "pattern": "p-silver",
+    "image": "",
+    "tagline": "Smooth, low-glare silver finish.",
+    "desc": "The Silver DESKTOPMAT — a smooth, low-friction desk mat in a clean silver finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  },
+  {
+    "id": "white",
+    "name": "White",
+    "color": "#F5F5F5",
+    "pattern": "p-white",
+    "image": "",
+    "tagline": "Smooth, low-glare white finish.",
+    "desc": "The White DESKTOPMAT — a smooth, low-friction desk mat in a clean white finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  },
+  {
+    "id": "black",
+    "name": "Black",
+    "color": "#1A1A1A",
+    "pattern": "p-black",
+    "image": "",
+    "tagline": "Smooth, low-glare black finish.",
+    "desc": "The Black DESKTOPMAT — a smooth, low-friction desk mat in a clean black finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  },
+  {
+    "id": "dark-gray",
+    "name": "Dark Gray",
+    "color": "#6B7A8F",
+    "pattern": "p-dark-gray",
+    "image": "",
+    "tagline": "Smooth, low-glare dark gray finish.",
+    "desc": "The Dark Gray DESKTOPMAT — a smooth, low-friction desk mat in a clean dark gray finish. Stitched edges, non-slip base, and a surface built for everyday typing, mousing, and writing.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 28.89
+      },
+      {
+        "name": "80 × 40 cm",
+        "dims": "80 × 40 cm",
+        "price": 44.99
+      },
+      {
+        "name": "90 × 43 cm",
+        "dims": "90 × 43 cm",
+        "price": 54.99
+      },
+      {
+        "name": "100 × 50 cm",
+        "dims": "100 × 50 cm",
+        "price": 69.99
+      },
+      {
+        "name": "120 × 50 cm",
+        "dims": "120 × 50 cm",
+        "price": 84.99
+      }
+    ]
+  }
+]
