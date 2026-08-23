@@ -143,7 +143,7 @@ function renderHome() {
           <button class="btn btn-outline" onclick="go('shop')">Browse sizes</button>
         </div>
       </div>
-      <img class="hero-visual" src="/Images/Default%20Mat/mat%20(3).png" alt="DESKTOPMAT desk mat" />
+      <img class="hero-visual" src="/Images/Default%20Mat/Mat(5).png" alt="DESKTOPMAT desk mat" />
     </section>
 
     <section class="section">
@@ -173,7 +173,7 @@ function renderHome() {
 function renderInfoPage(page) {
   const pages = {
     contact: ['Contact', ['Need help with an order, product question, or checkout issue? Email desktopmatinfo@gmail.com and include your order reference when one is available. We read every message and use the details you provide only to help with your request.', 'For questions about colors, sizes, shipping estimates, or returns, tell us what you were looking at and what you need. A clear subject and a short description help us respond more quickly.', 'We aim to reply within two business days. Please do not email payment card numbers, passwords, or secret API keys.']],
-    shipping: ['Shipping', ['Every order is prepared after checkout and shipped to the address entered during payment. Available shipping methods, prices, and estimated delivery windows appear before you confirm the order.', 'Standard, express, and overnight options may be available depending on the destination and current fulfillment capacity. Orders that qualify for free shipping will show the shipping charge as free before you continue to Stripe Checkout.', 'After an order is placed, keep the order reference shown on the confirmation page. It helps us locate your purchase if you need support. Carrier tracking details are provided separately once a package has actually shipped.']],
+    shipping: ['Shipping', ['Every order is prepared after checkout and shipped to the address entered during payment. Available shipping methods, prices, and estimated delivery windows appear before you confirm the order.', 'Standard shipping is currently available. Express and overnight shipping are coming soon. Orders that qualify for free shipping will show the shipping charge as free before you continue to Stripe Checkout.', 'After an order is placed, keep the order reference shown on the confirmation page. It helps us locate your purchase if you need support. Carrier tracking details are provided separately once a package has actually shipped.']],
     returns: ['Returns', ['We want your desk setup to feel right. If you need to request a return, email desktopmatinfo@gmail.com with your order reference, the item you want to return, and a brief explanation of the issue.', 'Please contact us before mailing anything back so we can confirm the correct return instructions. Items should be unused and protected during transit whenever possible. Return eligibility can depend on the condition of the product and the timing of the request.', 'Once an approved return is received and checked, we will explain the next step for the refund or replacement. Original shipping charges may not be refundable unless the item arrived damaged or there was an error with the order.']],
     about: ['About DESKTOPMAT', ['DESKTOPMAT makes desk mats for people who care about the surface beneath their work. The goal is simple: a smooth, stable place for a keyboard, mouse, notebook, and the small rituals that make focused work easier.', 'The collection is intentionally restrained. Instead of overwhelming you with features, we focus on useful sizes, calm colors, stitched edges, and a low-friction surface that works through long sessions at a desk.', 'We are building the store carefully, one improvement at a time. That includes clearer product information, dependable checkout behavior, and support that treats every order as more than a transaction.']],
     sustainability: ['Sustainability', ['We try to keep the product line focused so materials, packaging, and fulfillment decisions stay understandable. A smaller, considered collection is easier to manage than a constant cycle of unnecessary variations.', 'Packaging is kept as simple as practical while still protecting the mat during transit. We are also working toward clearer information about materials and fulfillment so customers can make decisions with useful context rather than vague promises.', 'Sustainability is ongoing work, not a label we consider finished. As the store grows, we will continue looking for ways to reduce excess packaging, avoid avoidable waste, and make improvements that hold up beyond the product page.']],
@@ -589,14 +589,15 @@ function renderCartPage() {
 function renderCheckout() {
   const lines = cartLines();
   if (!lines.length) { go('cart'); return; }
+  if (checkoutState.shippingMethod !== 'standard') checkoutState.shippingMethod = 'standard';
   const subtotal = cartSubtotal();
   const freeShip = subtotal >= 75 || promoFreeShippingEligible();
   const discount = discountPercent();
 
   const rates = {
-    standard: { label: 'Standard', sub: '5–7 business days', price: 6.99 },
-    express: { label: 'Express', sub: '2–3 business days', price: 14.99 },
-    overnight: { label: 'Overnight', sub: '1 business day', price: 29.99 },
+    standard: { label: 'Standard', sub: '5–7 business days', price: 6.99, available: true },
+    express: { label: 'Express', sub: '2–3 business days', price: 14.99, available: false },
+    overnight: { label: 'Overnight', sub: '1 business day', price: 29.99, available: false },
   };
   const shipCost = freeShip ? 0 : rates[checkoutState.shippingMethod].price;
   const total = subtotal * (1 - discount / 100) + shipCost;
@@ -632,12 +633,12 @@ function renderCheckout() {
         <div class="form-section">
           <h3>Shipping method</h3>
           ${Object.entries(rates).map(([key, r]) => `
-            <div class="ship-option ${checkoutState.shippingMethod === key ? 'selected' : ''}" onclick="selectShipping('${key}')">
+            <div class="ship-option ${checkoutState.shippingMethod === key ? 'selected' : ''}${r.available ? '' : ' disabled'}" ${r.available ? `onclick="selectShipping('${key}')"` : 'aria-disabled="true"'}>
               <div>
                 <div class="ship-option-label">${r.label}</div>
                 <div class="ship-option-sub">${r.sub}</div>
               </div>
-              <div class="ship-option-price">${freeShip ? 'Free' : fmt(r.price)}</div>
+              <div class="ship-option-price">${r.available ? (freeShip ? 'Free' : fmt(r.price)) : 'COMING SOON'}</div>
             </div>
           `).join('')}
         </div>
@@ -672,6 +673,7 @@ function renderCheckout() {
 }
 
 function selectShipping(key) {
+  if (key !== 'standard') return;
   checkoutState.shippingMethod = key;
   renderCheckout();
 }

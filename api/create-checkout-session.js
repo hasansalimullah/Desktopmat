@@ -45,6 +45,9 @@ module.exports = async function handler(req, res) {
 
   try {
     const { items, shippingMethod, promoCode, contact } = req.body || {};
+    if (shippingMethod && shippingMethod !== 'standard') {
+      return res.status(400).json({ error: 'This shipping method is coming soon.' });
+    }
     if (!Array.isArray(items) || items.length === 0) {
       return res.status(400).json({ error: 'Cart is empty.' });
     }
