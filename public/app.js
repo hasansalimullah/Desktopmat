@@ -14,6 +14,7 @@ let checkoutState = {
 const SAVED_INFO_KEY = 'desktopmat_checkout_info';
 const NEWSLETTER_SIGNUP_KEY = 'desktopmat_newsletter_signup';
 const NEWSLETTER_DISMISSED_KEY = 'desktopmat_newsletter_dismissed';
+const REVIEWS_KEY = 'desktopmat_reviews';
 
 const METALLIC_PRODUCT_IDS = new Set(['bronze', 'silver']);
 const WELCOME_DISCOUNT_CODE = 'WELCOME10';
@@ -315,8 +316,73 @@ function renderProduct(id) {
         <p class="pdp-desc">${product.desc}</p>
       </div>
     </div>
+    ${reviewsHTML(product, selectedVariant)}
   `;
 }
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>'"]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[character]));
+}
+
+function reviewsFor(productId) {
+  try {
+    const reviews = JSON.parse(localStorage.getItem(REVIEWS_KEY) || '{}');
+    return Array.isArray(reviews[productId]) ? reviews[productId] : [];
+  } catch {
+    return [];
+  }
+}
+
+function reviewsHTML(product, selectedVariant) {
+  const productId = product.variants ? selectedVariant.id : product.id;
+  const reviews = reviewsFor(productId);
+  const average = reviews.length ? reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length : 0;
+  return `
+    <section class="reviews-section" aria-labelledby="reviews-title">
+      <div class="reviews-head"><div><h2 id="reviews-title">Reviews</h2><div class="reviews-summary">${reviews.length ? `${average.toFixed(1)} out of 5 · ${reviews.length} review${reviews.length === 1 ? '' : 's'}` : 'Be the first to review this product.'}</div></div></div>
+      <form class="review-form" onsubmit="submitReview(event, '${productId}')">
+        <input name="reviewer" type="text" maxlength="60" placeholder="Your name" required />
+        <div class="review-rating" role="group" aria-label="Rating">
+          ${[1, 2, 3, 4, 5].map((rating) => `<button type="button" aria-label="${rating} star${rating === 1 ? '' : 's'}" onclick="setReviewRating(${rating})">★</button>`).join('')}
+          <span class="review-rating-label" id="review-rating-label">Choose a rating</span>
+        </div>
+        <input type="hidden" name="rating" id="review-rating" value="" />
+        <textarea name="comment" maxlength="600" placeholder="Share your experience" required></textarea>
+        <button class="btn btn-black" type="submit">Submit review</button>
+      </form>
+      <div class="review-list">${reviews.map((review) => `
+        <article class="review-item"><div class="review-item-top"><span class="review-author">${escapeHTML(review.name)}</span><span class="review-date">${escapeHTML(review.date)}</span></div><div class="review-stars" aria-label="${review.rating} out of 5 stars">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div><p class="review-text">${escapeHTML(review.comment)}</p></article>
+      `).join('')}</div>
+    </section>
+  `;
+}
+
+function setReviewRating(rating) {
+  const input = document.getElementById('review-rating');
+  const label = document.getElementById('review-rating-label');
+  if (!input || !label) return;
+  input.value = rating;
+  label.textContent = `${rating} out of 5 stars`;
+  document.querySelectorAll('.review-rating button').forEach((button, index) => button.classList.toggle('active', index < rating));
+}
+window.setReviewRating = setReviewRating;
+
+function submitReview(event, productId) {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const rating = Number(form.rating.value);
+  if (!rating || rating < 1 || rating > 5) {
+    alert('Please choose a star rating.');
+    return;
+  }
+  let reviews = {};
+  try { reviews = JSON.parse(localStorage.getItem(REVIEWS_KEY) || '{}'); } catch { reviews = {}; }
+  if (!Array.isArray(reviews[productId])) reviews[productId] = [];
+  reviews[productId].unshift({ name: form.reviewer.value.trim(), rating, comment: form.comment.value.trim(), date: new Date().toLocaleDateString() });
+  localStorage.setItem(REVIEWS_KEY, JSON.stringify(reviews));
+  renderProduct(productId === 'colored-mat' ? 'colored-mat' : productId);
+}
+window.submitReview = submitReview;
 
 function selectGalleryImage(image, button) {
   document.getElementById('pdp-gallery-main').innerHTML = `<img src="${image}" alt="Mat detail view" />`;
