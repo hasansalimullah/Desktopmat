@@ -1,0 +1,8 @@
+node_modules/
+.env
+.env.*
+!.env.example
+
+# Local and editor files
+.DS_Store
+.vercel/
