@@ -38,9 +38,14 @@ const SHIPPING_RATES = {
   overnight: { label: 'Overnight Shipping (1 business day)', amount: 29.99 },
 };
 const TAX_RATE = 0.0; // flat-rate estimated tax, adjust as needed (0–1)
+const FREE_SHIPPING_CODE = 'ONLYIKNOW';
 
 function centsFromDollars(n) {
   return Math.round(n * 100);
+}
+
+function normalizePromoCode(code) {
+  return String(code || '').replace(/\s+/g, '').toUpperCase();
 }
 
 function getCatalogItem(productId) {
@@ -104,7 +109,7 @@ app.get('/api/health', (req, res) => {
 
 app.post('/create-checkout-session', async (req, res) => {
   try {
-    const { items, shippingMethod, contact } = req.body || {};
+    const { items, shippingMethod, promoCode, contact } = req.body || {};
     if (!Array.isArray(items) || items.length === 0) {
       return res.status(400).json({ error: 'Cart is empty.' });
     }
@@ -141,7 +146,9 @@ app.post('/create-checkout-session', async (req, res) => {
     // Shipping
     const method = SHIPPING_RATES[shippingMethod] ? shippingMethod : 'standard';
     const subtotalDollars = subtotalCents / 100;
-    const freeShipping = subtotalDollars >= FREE_SHIPPING_THRESHOLD;
+    const testingOnly = items.every((item) => item && item.productId === 'testing');
+    const promoFreeShipping = testingOnly && normalizePromoCode(promoCode) === FREE_SHIPPING_CODE;
+    const freeShipping = promoFreeShipping || subtotalDollars >= FREE_SHIPPING_THRESHOLD;
     const shippingAmount = freeShipping ? 0 : SHIPPING_RATES[method].amount;
 
     if (shippingAmount > 0) {
@@ -181,6 +188,7 @@ app.post('/create-checkout-session', async (req, res) => {
       metadata: {
         freeShipping: String(freeShipping),
         shippingMethod: method,
+        promoCode: promoFreeShipping ? FREE_SHIPPING_CODE : '',
       },
     });
 

@@ -8,6 +8,7 @@ let checkoutState = {
   contact: { email: '' },
   address: { firstName: '', lastName: '', street: '', city: '', state: '', zip: '', country: 'US' },
   shippingMethod: 'standard',
+  promoCode: '',
 };
 
 const METALLIC_PRODUCT_IDS = new Set(['bronze', 'silver']);
@@ -549,7 +550,7 @@ function renderCheckout() {
         `).join('')}
         <div class="row"><span>Shipping</span><span>${freeShip ? 'Free' : fmt(shipCost)}</span></div>
         <div class="promo-row">
-          <input placeholder="Promo code" id="promo-input" />
+          <input placeholder="Promo code" id="promo-input" value="${checkoutState.promoCode}" />
           <button type="button" onclick="applyPromo()">Apply</button>
         </div>
         <div class="row total"><span>Total</span><span id="checkout-total">${fmt(total)}</span></div>
@@ -565,10 +566,9 @@ function selectShipping(key) {
 window.selectShipping = selectShipping;
 
 function applyPromo() {
-  // Cosmetic only — no discount logic wired up, per spec.
   const input = document.getElementById('promo-input');
-  input.placeholder = 'Applied (cosmetic only)';
-  input.value = '';
+  checkoutState.promoCode = input.value.trim();
+  input.placeholder = 'Code applied at checkout';
 }
 window.applyPromo = applyPromo;
 
@@ -584,6 +584,7 @@ async function submitCheckout(e) {
     zip: document.getElementById('cf-zip').value,
     country: document.getElementById('cf-country').value,
   };
+  checkoutState.promoCode = document.getElementById('promo-input').value.trim();
 
   const btn = document.getElementById('checkout-submit');
   btn.disabled = true;
@@ -596,6 +597,7 @@ async function submitCheckout(e) {
       body: JSON.stringify({
         items: cart.map((c) => ({ productId: c.productId, size: c.size, qty: c.qty })),
         shippingMethod: checkoutState.shippingMethod,
+        promoCode: checkoutState.promoCode,
         contact: checkoutState.contact,
       }),
     });
