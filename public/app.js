@@ -12,6 +12,7 @@ let checkoutState = {
 };
 
 const METALLIC_PRODUCT_IDS = new Set(['bronze', 'silver']);
+const FREE_SHIPPING_CODE = 'ONLYIKNOW';
 const DEFAULT_MAT_IMAGES = [
   '/Images/Default%20Mat/mat%20(4).png',
   '/Images/Default%20Mat/mat%20(2).png',
@@ -359,6 +360,12 @@ function cartSubtotal() {
   return cartLines().reduce((sum, l) => sum + l.size.price * l.qty, 0);
 }
 
+function promoFreeShippingEligible() {
+  return cartLines().length > 0
+    && cartLines().every((line) => line.product.id === 'testing')
+    && checkoutState.promoCode.replace(/\s+/g, '').toUpperCase() === FREE_SHIPPING_CODE;
+}
+
 function updateCartBadge() {
   const count = cart.reduce((n, c) => n + c.qty, 0);
   const badge = document.getElementById('cart-badge');
@@ -484,7 +491,7 @@ function renderCheckout() {
   const lines = cartLines();
   if (!lines.length) { go('cart'); return; }
   const subtotal = cartSubtotal();
-  const freeShip = subtotal >= 75;
+  const freeShip = subtotal >= 75 || promoFreeShippingEligible();
 
   const rates = {
     standard: { label: 'Standard', sub: '5–7 business days', price: 6.99 },
@@ -548,7 +555,7 @@ function renderCheckout() {
         ${lines.map((l) => `
           <div class="row"><span>${l.product.name} · ${l.size.dims} × ${l.qty}</span><span>${fmt(l.size.price * l.qty)}</span></div>
         `).join('')}
-        <div class="row"><span>Shipping</span><span>${freeShip ? 'Free' : fmt(shipCost)}</span></div>
+        <div class="row"><span>Shipping</span><span id="checkout-shipping-cost">${freeShip ? 'Free' : fmt(shipCost)}</span></div>
         <div class="promo-row">
           <input placeholder="Promo code" id="promo-input" value="${checkoutState.promoCode}" />
           <button type="button" onclick="applyPromo()">Apply</button>
@@ -568,7 +575,20 @@ window.selectShipping = selectShipping;
 function applyPromo() {
   const input = document.getElementById('promo-input');
   checkoutState.promoCode = input.value.trim();
-  input.placeholder = 'Code applied at checkout';
+  const eligible = promoFreeShippingEligible();
+  input.placeholder = eligible ? 'Free shipping applied' : 'Code only works on testing';
+  const lines = cartLines();
+  const subtotal = cartSubtotal();
+  const freeShip = subtotal >= 75 || eligible;
+  const rates = { standard: 6.99, express: 14.99, overnight: 29.99 };
+  const shippingCost = freeShip ? 0 : rates[checkoutState.shippingMethod];
+  const shippingElement = document.getElementById('checkout-shipping-cost');
+  const totalElement = document.getElementById('checkout-total');
+  if (shippingElement) shippingElement.textContent = freeShip ? 'Free' : fmt(shippingCost);
+  if (totalElement) totalElement.textContent = fmt(subtotal + shippingCost);
+  document.querySelectorAll('.ship-option-price').forEach((element) => {
+    element.textContent = freeShip ? 'Free' : element.textContent;
+  });
 }
 window.applyPromo = applyPromo;
 
