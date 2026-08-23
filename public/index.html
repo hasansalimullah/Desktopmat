@@ -116,13 +116,13 @@
   .hero {
     background: white url('/Images/Default%20Mat/background.png') center / cover no-repeat; border-radius: 0;
     width: 100vw; min-height: 100svh; margin: 0 0 64px calc(50% - 50vw); padding: 72px clamp(24px, 5.3vw, 80px) 40px;
-    display: flex; align-items: center; gap: 40px; position: relative;
+    display: flex; align-items: center; justify-content: center; gap: 40px; position: relative;
   }
-  .hero > div { position: relative; z-index: 1; max-width: 500px; }
-  .hero h1 { font-size: clamp(52px, 6.2vw, 92px); line-height: 0.94; max-width: 480px; text-transform: uppercase; }
+  .hero > div { position: relative; z-index: 1; max-width: 500px; margin-inline: auto; text-align: center; }
+  .hero h1 { font-size: clamp(52px, 6.2vw, 92px); line-height: 0.94; max-width: 480px; margin-inline: auto; text-transform: uppercase; }
   .hero h1 span { display: block; color: var(--accent); }
-  .hero p { color: var(--text-muted); margin-top: 28px; max-width: 430px; font-size: clamp(15px, 1.4vw, 20px); line-height: 1.35; }
-  .hero-badge { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; width: 72px; height: 72px; margin: 0 0 0 32px; border-radius: 50%; background: rgba(255,255,255,0.9); color: var(--text); font-family: var(--font-mono); font-size: 10px; line-height: 1.05; font-weight: 700; vertical-align: middle; }
+  .hero p { color: var(--text-muted); margin: 28px auto 0; max-width: 430px; font-size: clamp(15px, 1.4vw, 20px); line-height: 1.35; }
+  .hero-badge { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 72px; height: 72px; margin: 24px auto 0; border-radius: 50%; background: rgba(255,255,255,0.9); color: var(--text); font-family: var(--font-mono); font-size: 10px; line-height: 1.05; font-weight: 700; }
   .hero-badge strong { font-size: 25px; }
   .hero .actions { margin-top: 28px; display: flex; gap: 12px; }
   @media (max-width: 900px) {
@@ -130,7 +130,6 @@
     .hero > div { width: 100%; }
     .hero h1 { font-size: 48px; max-width: 420px; margin-inline: auto; }
     .hero p { margin-inline: auto; }
-    .hero-badge { display: flex; margin: 24px auto 0; }
     .hero .actions { justify-content: center; }
     .hero { background-position: center; }
   }
