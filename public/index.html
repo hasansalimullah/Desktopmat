@@ -261,6 +261,16 @@
 
   .empty-state { text-align: center; padding: 100px 20px; color: var(--text-muted); }
   .empty-state h2 { color: var(--text); margin-bottom: 10px; }
+  .newsletter-section { display: flex; justify-content: space-between; align-items: center; gap: 28px; margin: 72px 0 0; padding: 36px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .newsletter-section h2 { font-size: 24px; margin-top: 8px; }
+  .newsletter-section p { color: var(--text-muted); margin-top: 6px; font-size: 13px; }
+  .newsletter-section form { display: flex; gap: 8px; min-width: min(100%, 390px); }
+  .newsletter-section input { flex: 1; min-width: 0; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--r-sm); font: inherit; }
+  .eyebrow { color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; }
+  .info-page { max-width: 680px; margin: 80px auto; padding: 0 20px; }
+  .info-page h1 { font-size: 36px; margin: 12px 0; }
+  .info-page p { color: var(--text-muted); line-height: 1.7; margin-bottom: 24px; }
+  @media (max-width: 700px) { .newsletter-section { display: block; } .newsletter-section form { margin-top: 20px; min-width: 0; } }
 </style>
 </head>
 <body>
@@ -327,14 +337,14 @@
       </div>
       <div>
         <h4>Support</h4>
-        <a href="#" onclick="return false;">Contact</a>
-        <a href="#" onclick="return false;">Shipping</a>
-        <a href="#" onclick="return false;">Returns</a>
+        <button onclick="go('info','contact')">Contact</button>
+        <button onclick="go('info','shipping')">Shipping</button>
+        <button onclick="go('info','returns')">Returns</button>
       </div>
       <div>
         <h4>Company</h4>
-        <a href="#" onclick="return false;">About</a>
-        <a href="#" onclick="return false;">Sustainability</a>
+        <button onclick="go('info','about')">About</button>
+        <button onclick="go('info','sustainability')">Sustainability</button>
       </div>
     </div>
     <div class="footer-bottom">

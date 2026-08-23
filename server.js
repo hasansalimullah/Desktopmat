@@ -40,6 +40,7 @@ const SHIPPING_RATES = {
 };
 const TAX_RATE = 0.0; // flat-rate estimated tax, adjust as needed (0–1)
 const FREE_SHIPPING_CODE = 'ONLYIKNOW';
+const WELCOME_DISCOUNT_CODE = 'WELCOME10';
 
 function centsFromDollars(n) {
   return Math.round(n * 100);
@@ -179,6 +180,12 @@ app.post('/create-checkout-session', async (req, res) => {
       }
     }
 
+    const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+    const welcomeDiscount = normalizePromoCode(promoCode) === WELCOME_DISCOUNT_CODE;
+    const discounts = welcomeDiscount
+      ? [{ coupon: (await stripe.coupons.create({ percent_off: 10, duration: 'once', name: WELCOME_DISCOUNT_CODE })).id }]
+      : undefined;
+    const trackingNumber = `DM-${crypto.randomBytes(5).toString('hex').toUpperCase()}`;
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       line_items,
@@ -186,11 +193,12 @@ app.post('/create-checkout-session', async (req, res) => {
       cancel_url: `${DOMAIN}/?page=cart`,
       customer_email: contact && contact.email ? contact.email : undefined,
       shipping_address_collection: { allowed_countries: ['US', 'CA'] },
+      discounts,
       metadata: {
         freeShipping: String(freeShipping),
         shippingMethod: method,
-        promoCode: promoFreeShipping ? FREE_SHIPPING_CODE : '',
-        trackingNumber: `DM-${crypto.randomBytes(5).toString('hex').toUpperCase()}`,
+        promoCode: promoFreeShipping ? FREE_SHIPPING_CODE : welcomeDiscount ? WELCOME_DISCOUNT_CODE : '',
+        trackingNumber,
       },
     });
 

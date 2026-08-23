@@ -12,9 +12,11 @@ let checkoutState = {
   saveInfo: false,
 };
 const SAVED_INFO_KEY = 'desktopmat_checkout_info';
+const NEWSLETTER_SIGNUP_KEY = 'desktopmat_newsletter_signup';
 
 const METALLIC_PRODUCT_IDS = new Set(['bronze', 'silver']);
 const FREE_SHIPPING_CODE = 'ONLYIKNOW';
+const WELCOME_DISCOUNT_CODE = 'WELCOME10';
 const DEFAULT_MAT_IMAGES = [
   '/Images/Default%20Mat/mat%20(4).png',
   '/Images/Default%20Mat/mat%20(2).png',
@@ -120,6 +122,7 @@ async function go(page, param) {
     case 'product': return renderProduct(param);
     case 'cart': return renderCartPage();
     case 'checkout': return renderCheckout();
+    case 'info': return renderInfoPage(param);
     case 'confirmation': return renderConfirmation(param);
     default: return renderHome();
   }
@@ -151,7 +154,31 @@ function renderHome() {
         ${featured.map(cardHTML).join('')}
       </div>
     </section>
+
+    <section class="newsletter-section">
+      <div>
+        <span class="eyebrow">DESKTOPMAT NOTES</span>
+        <h2>Join the list. Get 10% off.</h2>
+        <p>New colors, desk setups, and occasional offers.</p>
+      </div>
+      <form id="newsletter-form" onsubmit="signUpNewsletter(event)">
+        <input id="newsletter-email" type="email" autocomplete="email" placeholder="Email address" required />
+        <button class="btn btn-black" type="submit">Get WELCOME10</button>
+      </form>
+    </section>
   `;
+}
+
+function renderInfoPage(page) {
+  const pages = {
+    contact: ['Contact', 'Questions about an order? Email desktopmatinfo@gmail.com.'],
+    shipping: ['Shipping', 'Orders are prepared promptly. Shipping options and delivery estimates are shown at checkout.'],
+    returns: ['Returns', 'Contact desktopmatinfo@gmail.com about a return request and include your order reference.'],
+    about: ['About DESKTOPMAT', 'Thoughtful desk mats for focused work and calmer setups.'],
+    sustainability: ['Sustainability', 'We keep the product line focused and packaging simple to reduce unnecessary waste.'],
+  };
+  const [title, copy] = pages[page] || pages.about;
+  app.innerHTML = `<section class="info-page"><span class="eyebrow">DESKTOPMAT</span><h1>${title}</h1><p>${copy}</p><button class="btn btn-primary" onclick="go('shop')">Shop all colors</button></section>`;
 }
 
 function cardHTML(product) {
@@ -388,6 +415,23 @@ function saveCheckoutInfo() {
   }
 }
 
+function normalizePromoCode(code) {
+  return String(code || '').replace(/\s+/g, '').toUpperCase();
+}
+
+function discountPercent() {
+  return normalizePromoCode(checkoutState.promoCode) === WELCOME_DISCOUNT_CODE ? 10 : 0;
+}
+
+function signUpNewsletter(event) {
+  event.preventDefault();
+  const email = document.getElementById('newsletter-email').value.trim().toLowerCase();
+  if (!email) return;
+  localStorage.setItem(NEWSLETTER_SIGNUP_KEY, email);
+  document.getElementById('newsletter-form').innerHTML = '<p>Thanks. Your code is <strong>WELCOME10</strong>.</p>';
+}
+window.signUpNewsletter = signUpNewsletter;
+
 function updateCartBadge() {
   const count = cart.reduce((n, c) => n + c.qty, 0);
   const badge = document.getElementById('cart-badge');
@@ -514,6 +558,7 @@ function renderCheckout() {
   if (!lines.length) { go('cart'); return; }
   const subtotal = cartSubtotal();
   const freeShip = subtotal >= 75 || promoFreeShippingEligible();
+  const discount = discountPercent();
 
   const rates = {
     standard: { label: 'Standard', sub: '5–7 business days', price: 6.99 },
@@ -521,29 +566,29 @@ function renderCheckout() {
     overnight: { label: 'Overnight', sub: '1 business day', price: 29.99 },
   };
   const shipCost = freeShip ? 0 : rates[checkoutState.shippingMethod].price;
-  const total = subtotal + shipCost;
+  const total = subtotal * (1 - discount / 100) + shipCost;
 
   app.innerHTML = `
     <h1 style="margin:40px 0 24px;font-size:28px;">Checkout</h1>
     <div class="cart-page">
-      <form class="checkout-form" id="checkout-form" onsubmit="submitCheckout(event)">
+      <form class="checkout-form" id="checkout-form" autocomplete="on" onsubmit="submitCheckout(event)">
         <div class="form-section">
           <h3>Contact</h3>
-          <div class="field"><label>Email</label><input type="email" autocomplete="email" required id="cf-email" value="${checkoutState.contact.email}" placeholder="you@example.com" /></div>
+          <div class="field"><label>Email</label><input type="email" name="email" autocomplete="email" required id="cf-email" value="${checkoutState.contact.email}" placeholder="you@example.com" /></div>
         </div>
 
-        <div class="form-section">
+        <div class="form-section" autocomplete="shipping">
           <h3>Shipping address</h3>
           <div class="form-grid">
-            <div class="field"><label>First name</label><input autocomplete="given-name" required id="cf-first" value="${checkoutState.address.firstName}" /></div>
-            <div class="field"><label>Last name</label><input autocomplete="family-name" required id="cf-last" value="${checkoutState.address.lastName}" /></div>
-            <div class="field full"><label>Street address</label><input autocomplete="street-address" required id="cf-street" value="${checkoutState.address.street}" /></div>
-            <div class="field"><label>City</label><input autocomplete="address-level2" required id="cf-city" value="${checkoutState.address.city}" /></div>
-            <div class="field"><label>State</label><input autocomplete="address-level1" required id="cf-state" value="${checkoutState.address.state}" /></div>
-            <div class="field"><label>ZIP code</label><input autocomplete="postal-code" required id="cf-zip" value="${checkoutState.address.zip}" /></div>
+            <div class="field"><label>First name</label><input name="given-name" autocomplete="shipping given-name" required id="cf-first" value="${checkoutState.address.firstName}" /></div>
+            <div class="field"><label>Last name</label><input name="family-name" autocomplete="shipping family-name" required id="cf-last" value="${checkoutState.address.lastName}" /></div>
+            <div class="field full"><label>Street address</label><input name="street-address" autocomplete="shipping street-address" required id="cf-street" value="${checkoutState.address.street}" /></div>
+            <div class="field"><label>City</label><input name="address-level2" autocomplete="shipping address-level2" required id="cf-city" value="${checkoutState.address.city}" /></div>
+            <div class="field"><label>State</label><input name="address-level1" autocomplete="shipping address-level1" required id="cf-state" value="${checkoutState.address.state}" /></div>
+            <div class="field"><label>ZIP code</label><input name="postal-code" autocomplete="shipping postal-code" required id="cf-zip" value="${checkoutState.address.zip}" /></div>
             <div class="field">
               <label>Country</label>
-              <select autocomplete="country" id="cf-country">
+              <select name="country" autocomplete="shipping country" id="cf-country">
                 <option value="US" ${checkoutState.address.country === 'US' ? 'selected' : ''}>United States</option>
                 <option value="CA" ${checkoutState.address.country === 'CA' ? 'selected' : ''}>Canada</option>
               </select>
@@ -582,6 +627,7 @@ function renderCheckout() {
           <div class="row"><span>${l.product.name} · ${l.size.dims} × ${l.qty}</span><span>${fmt(l.size.price * l.qty)}</span></div>
         `).join('')}
         <div class="row"><span>Shipping</span><span id="checkout-shipping-cost">${freeShip ? 'Free' : fmt(shipCost)}</span></div>
+        <div class="row" id="checkout-discount-row" style="${discountPercent() ? '' : 'display:none;'}"><span>WELCOME10</span><span>-${fmt(subtotal * discountPercent() / 100)}</span></div>
         <div class="promo-row">
           <input placeholder="Promo code" id="promo-input" value="${checkoutState.promoCode}" />
           <button type="button" onclick="applyPromo()">Apply</button>
@@ -602,7 +648,8 @@ function applyPromo() {
   const input = document.getElementById('promo-input');
   checkoutState.promoCode = input.value.trim();
   const eligible = promoFreeShippingEligible();
-  input.placeholder = eligible ? 'Free shipping applied' : 'Code only works on testing';
+  const discount = discountPercent();
+  input.placeholder = eligible ? 'Free shipping applied' : discount ? '10% discount applied' : 'Code not recognized';
   const lines = cartLines();
   const subtotal = cartSubtotal();
   const freeShip = subtotal >= 75 || eligible;
@@ -611,7 +658,12 @@ function applyPromo() {
   const shippingElement = document.getElementById('checkout-shipping-cost');
   const totalElement = document.getElementById('checkout-total');
   if (shippingElement) shippingElement.textContent = freeShip ? 'Free' : fmt(shippingCost);
-  if (totalElement) totalElement.textContent = fmt(subtotal + shippingCost);
+  if (totalElement) totalElement.textContent = fmt((subtotal * (1 - discount / 100)) + shippingCost);
+  const discountRow = document.getElementById('checkout-discount-row');
+  if (discountRow) {
+    discountRow.style.display = discount ? 'flex' : 'none';
+    discountRow.lastElementChild.textContent = discount ? `-${fmt(subtotal * discount / 100)}` : '';
+  }
   document.querySelectorAll('.ship-option-price').forEach((element) => {
     element.textContent = freeShip ? 'Free' : element.textContent;
   });

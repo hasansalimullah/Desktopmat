@@ -11,6 +11,7 @@ const SHIPPING_RATES = {
 };
 const FREE_SHIPPING_THRESHOLD = 75;
 const FREE_SHIPPING_CODE = 'ONLYIKNOW';
+const WELCOME_DISCOUNT_CODE = 'WELCOME10';
 
 function centsFromDollars(amount) {
   return Math.round(amount * 100);
@@ -72,6 +73,10 @@ module.exports = async function handler(req, res) {
     const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
     const domain = process.env.DOMAIN || `https://${req.headers.host}`;
     const trackingNumber = `DM-${crypto.randomBytes(5).toString('hex').toUpperCase()}`;
+    const welcomeDiscount = normalizePromoCode(promoCode) === WELCOME_DISCOUNT_CODE;
+    const discounts = welcomeDiscount
+      ? [{ coupon: (await stripe.coupons.create({ percent_off: 10, duration: 'once', name: WELCOME_DISCOUNT_CODE })).id }]
+      : undefined;
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       line_items,
@@ -79,7 +84,8 @@ module.exports = async function handler(req, res) {
       cancel_url: `${domain}/?page=cart`,
       customer_email: contact?.email || undefined,
       shipping_address_collection: { allowed_countries: ['US', 'CA'] },
-      metadata: { freeShipping: String(shippingAmount === 0), shippingMethod: method, promoCode: promoFreeShipping ? FREE_SHIPPING_CODE : '', trackingNumber },
+      discounts,
+      metadata: { freeShipping: String(shippingAmount === 0), shippingMethod: method, promoCode: promoFreeShipping ? FREE_SHIPPING_CODE : welcomeDiscount ? WELCOME_DISCOUNT_CODE : '', trackingNumber },
     });
     return res.status(200).json({ url: session.url });
   } catch (error) {
