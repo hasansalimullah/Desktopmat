@@ -999,6 +999,23 @@
     ]
   },
   {
+    "id": "testing",
+    "name": "testing",
+    "color": "#D9D9D9",
+    "pattern": "p-testing",
+    "image": "",
+    "tagline": "Testing product.",
+    "desc": "Testing product for the DESKTOPMAT storefront.",
+    "tag": "",
+    "sizes": [
+      {
+        "name": "60 × 35 cm",
+        "dims": "60 × 35 cm",
+        "price": 0
+      }
+    ]
+  },
+  {
     "id": "dark-gray",
     "name": "Dark Gray",
     "color": "#6B7A8F",
