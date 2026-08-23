@@ -139,6 +139,8 @@
     .hero .actions .btn { width: 100%; }
   }
 
+  main:not(:has(.hero)) { padding-top: 72px; }
+
   section.section { margin: 64px 0; }
   .section-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 24px; }
   .section-head h2 { font-size: 24px; }
@@ -180,7 +182,7 @@
   .search-input { min-width: 220px; }
 
   /* ---------- Product detail ---------- */
-  .pdp { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin: 112px 0 80px; }
+  .pdp { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin: 40px 0 80px; }
   @media (max-width: 860px) { .pdp { grid-template-columns: 1fr; gap: 28px; } }
   .pdp-img-wrap {
     background: var(--card-bg); border-radius: var(--r-lg); padding: 36px;
@@ -281,7 +283,7 @@
   .newsletter-section form { display: flex; gap: 8px; min-width: min(100%, 390px); }
   .newsletter-section input { flex: 1; min-width: 0; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--r-sm); font: inherit; }
   .eyebrow { color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; }
-  .info-page { max-width: 680px; margin: 80px auto; padding: 0 20px; }
+  .info-page { max-width: 680px; margin: 8px auto 80px; padding: 0 20px; }
   .info-page h1 { font-size: 36px; margin: 12px 0; }
   .info-page p { color: var(--text-muted); line-height: 1.8; margin-bottom: 20px; }
   .newsletter-modal-backdrop { position: fixed; inset: 0; background: rgba(11,18,32,0.45); z-index: 100; display: flex; align-items: center; justify-content: center; padding: 20px; }

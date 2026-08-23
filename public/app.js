@@ -556,7 +556,7 @@ function renderCartPage() {
   }
 
   app.innerHTML = `
-    <h1 style="margin:112px 0 24px;font-size:28px;">Your Bag</h1>
+    <h1 style="margin:40px 0 24px;font-size:28px;">Your Bag</h1>
     <div class="cart-page">
       <div>
         ${lines.map((l, i) => `
@@ -607,7 +607,7 @@ function renderCheckout() {
   const total = subtotal * (1 - discount / 100) + shipCost;
 
   app.innerHTML = `
-    <h1 style="margin:112px 0 24px;font-size:28px;">Checkout</h1>
+    <h1 style="margin:40px 0 24px;font-size:28px;">Checkout</h1>
     <div class="cart-page">
       <form class="checkout-form" id="checkout-form" autocomplete="on" onsubmit="submitCheckout(event)">
         <div class="form-section">
