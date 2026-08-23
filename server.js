@@ -17,7 +17,6 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const Stripe = require('stripe');
-const crypto = require('crypto');
 
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 const DOMAIN = process.env.DOMAIN || 'http://localhost:3000';
@@ -30,6 +29,10 @@ app.use('/Images', express.static(path.join(__dirname, 'Images')));
 
 const catalog = require('./public/products.json');
 const stripeCatalog = JSON.parse(fs.readFileSync(path.join(__dirname, 'stripe-catalog.json'), 'utf8'));
+
+app.get('/products/:productId', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 // ---- Shipping config (mirrors frontend copy) ----
 const FREE_SHIPPING_THRESHOLD = 75;
@@ -191,20 +194,19 @@ app.post('/create-checkout-session', async (req, res) => {
     const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
     const welcomeDiscount = normalizePromoCode(promoCode) === WELCOME_DISCOUNT_CODE;
     const discounts = welcomeDiscount ? [{ promotion_code: await getWelcomePromotionCode(stripe) }] : undefined;
-    const trackingNumber = `DM-${crypto.randomBytes(5).toString('hex').toUpperCase()}`;
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       line_items,
       success_url: `${DOMAIN}/?page=confirmation&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${DOMAIN}/?page=cart`,
       customer_email: contact && contact.email ? contact.email : undefined,
+      payment_intent_data: { receipt_email: contact && contact.email ? contact.email : undefined },
       shipping_address_collection: { allowed_countries: ['US', 'CA'] },
       discounts,
       metadata: {
         freeShipping: String(freeShipping),
         shippingMethod: method,
         promoCode: welcomeDiscount ? WELCOME_DISCOUNT_CODE : '',
-        trackingNumber,
       },
     });
 
@@ -231,7 +233,6 @@ app.get('/order-details', async (req, res) => {
       customer_email: session.customer_details ? session.customer_details.email : null,
       amount_total: session.amount_total,
       currency: session.currency,
-      tracking_number: session.metadata ? session.metadata.trackingNumber : null,
       shipping: session.shipping_details || null,
       line_items: session.line_items ? session.line_items.data.map((li) => ({
         description: li.description,

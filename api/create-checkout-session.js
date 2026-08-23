@@ -1,5 +1,4 @@
 const Stripe = require('stripe');
-const crypto = require('crypto');
 
 const catalog = require('../public/products.json');
 const stripeCatalog = require('../stripe-catalog.json');
@@ -80,7 +79,6 @@ module.exports = async function handler(req, res) {
 
     const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
     const domain = process.env.DOMAIN || `https://${req.headers.host}`;
-    const trackingNumber = `DM-${crypto.randomBytes(5).toString('hex').toUpperCase()}`;
     const welcomeDiscount = normalizePromoCode(promoCode) === WELCOME_DISCOUNT_CODE;
     const discounts = welcomeDiscount ? [{ promotion_code: await getWelcomePromotionCode(stripe) }] : undefined;
     const session = await stripe.checkout.sessions.create({
@@ -89,9 +87,10 @@ module.exports = async function handler(req, res) {
       success_url: `${domain}/?page=confirmation&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${domain}/?page=cart`,
       customer_email: contact?.email || undefined,
+      payment_intent_data: { receipt_email: contact?.email || undefined },
       shipping_address_collection: { allowed_countries: ['US', 'CA'] },
       discounts,
-      metadata: { freeShipping: String(shippingAmount === 0), shippingMethod: method, promoCode: welcomeDiscount ? WELCOME_DISCOUNT_CODE : '', trackingNumber },
+      metadata: { freeShipping: String(shippingAmount === 0), shippingMethod: method, promoCode: welcomeDiscount ? WELCOME_DISCOUNT_CODE : '' },
     });
     return res.status(200).json({ url: session.url });
   } catch (error) {

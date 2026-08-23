@@ -113,12 +113,17 @@ function matVisual(product, extraStyle = '') {
   return `<div class="mat-pattern" style="${matPatternStyle(product)}${extraStyle}"></div>`;
 }
 
+function productUrl(productId) {
+  return `/products/${encodeURIComponent(productId)}`;
+}
+
 // ---------- Router ----------
 async function go(page, param) {
   await loadProducts();
   window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
   toggleCart(false);
   toggleMobileNav(false);
+  if (page === 'product' && param) window.history.pushState({}, '', productUrl(param));
 
   switch (page) {
     case 'home': return renderHome();
@@ -189,7 +194,7 @@ function renderInfoPage(page) {
 
 function cardHTML(product) {
   return `
-    <div class="card" onclick="go('product','${product.id}')">
+    <a class="card" href="${productUrl(product.id)}" onclick="event.preventDefault();go('product','${product.id}')">
       <div class="card-img-wrap">${matVisual(product)}</div>
       <div class="card-body">
         ${product.tag ? `<span class="badge">${product.tag}</span>` : ''}
@@ -202,7 +207,7 @@ function cardHTML(product) {
           <div class="card-price">From ${fmt(startingPrice(product))}</div>
         </div>
       </div>
-    </div>
+    </a>
   `;
 }
 
@@ -279,6 +284,8 @@ let pdpState = { size: null, qty: 1, variantId: null };
 function renderProduct(id) {
   const product = id === 'colored-mat' ? storefrontProducts()[0] : findProduct(id);
   if (!product) { app.innerHTML = `<div class="empty-state"><h2>Product not found</h2></div>`; return; }
+  document.title = `${product.name} Desk Mat | DESKTOPMAT`;
+  document.querySelector('link[rel="canonical"]')?.setAttribute('href', `https://desktopmat.com${productUrl(product.id)}`);
   const selectedVariant = product.variants
     ? (product.variants.find((variant) => variant.id === pdpState.variantId) || product.variants[0])
     : product;
@@ -901,7 +908,6 @@ async function renderConfirmation(sessionId) {
         <h1 style="font-size:26px;">Order confirmed</h1>
         <p style="color:var(--text-muted);margin-top:8px;">A confirmation has been sent to ${order.customer_email || 'your email'}.</p>
         <div class="confirm-detail">
-          <div class="row" style="display:flex;justify-content:space-between;padding:6px 0;font-size:14px;"><span>Order tracking number</span><strong>${order.tracking_number || 'Pending'}</strong></div>
           ${order.line_items.map((li) => `
             <div class="row" style="display:flex;justify-content:space-between;padding:6px 0;font-size:14px;">
               <span>${li.description} × ${li.quantity}</span><span>${fmt(li.amount_total / 100)}</span>
@@ -933,7 +939,10 @@ window.toggleMobileNav = toggleMobileNav;
   const params = new URLSearchParams(window.location.search);
   const page = params.get('page');
   const sessionId = params.get('session_id');
-  if (page === 'confirmation' && sessionId) {
+  const productMatch = window.location.pathname.match(/^\/products\/([^/]+)\/?$/);
+  if (productMatch) {
+    renderProduct(decodeURIComponent(productMatch[1]));
+  } else if (page === 'confirmation' && sessionId) {
     renderConfirmation(sessionId);
   } else {
     renderHome();
