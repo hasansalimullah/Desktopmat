@@ -25,6 +25,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/Images', express.static(path.join(__dirname, 'Images')));
 
 const catalog = require('./public/products.json');
 const stripeCatalog = JSON.parse(fs.readFileSync(path.join(__dirname, 'stripe-catalog.json'), 'utf8'));
