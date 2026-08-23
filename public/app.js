@@ -16,7 +16,6 @@ const NEWSLETTER_SIGNUP_KEY = 'desktopmat_newsletter_signup';
 const NEWSLETTER_DISMISSED_KEY = 'desktopmat_newsletter_dismissed';
 
 const METALLIC_PRODUCT_IDS = new Set(['bronze', 'silver']);
-const FREE_SHIPPING_CODE = 'ONLYIKNOW';
 const WELCOME_DISCOUNT_CODE = 'WELCOME10';
 const DEFAULT_MAT_IMAGES = [
   '/Images/Default%20Mat/mat%20(4).png',
@@ -71,21 +70,20 @@ function startingPrice(product) {
 
 function storefrontProducts() {
   const colored = PRODUCTS.filter((p) => !METALLIC_PRODUCT_IDS.has(p.id));
-  const testing = PRODUCTS.find((p) => p.id === 'testing');
   return [{
     ...colored[0],
     id: 'colored-mat',
     name: 'Colored Desk Mat',
     image: DEFAULT_MAT_IMAGES[0],
-    tagline: 'One mat, 26 finishes, five sizes.',
+    tagline: 'One mat, 28 finishes, five sizes.',
     desc: 'The DESKTOPMAT in the finish you choose. A smooth, low-friction surface with stitched edges and a non-slip base for everyday typing, mousing, and writing.',
     variants: colored,
     gallery: DEFAULT_MAT_IMAGES,
-  }, ...(testing ? [{ ...testing, tag: 'TEST' }] : []), ...PRODUCTS.filter((p) => METALLIC_PRODUCT_IDS.has(p.id))];
+  }, ...PRODUCTS.filter((p) => METALLIC_PRODUCT_IDS.has(p.id))];
 }
 
 function allColorProducts() {
-  return PRODUCTS.filter((product) => product.id !== 'testing');
+  return PRODUCTS;
 }
 
 function productImage(product) {
@@ -141,8 +139,8 @@ function renderHome() {
     <section class="hero">
       <div>
         <h1>Surface<span>Matters</span></h1>
-        <p>Smoother glide. Cleaner desk. Better focus.<br />Precision-cut desk mats in 26 colors.</p>
-        <span class="hero-badge"><strong>26</strong>COLORS</span>
+        <p>Smoother glide. Cleaner desk. Better focus.<br />Precision-cut desk mats in 28 colors.</p>
+        <span class="hero-badge"><strong>28</strong>COLORS</span>
         <div class="actions">
           <button class="btn btn-primary" onclick="go('shop')">Shop all colors</button>
           <button class="btn btn-outline" onclick="go('shop')">Browse sizes</button>
@@ -395,9 +393,7 @@ function cartSubtotal() {
 }
 
 function promoFreeShippingEligible() {
-  return cartLines().length > 0
-    && cartLines().every((line) => line.product.id === 'testing')
-    && checkoutState.promoCode.replace(/\s+/g, '').toUpperCase() === FREE_SHIPPING_CODE;
+  return false;
 }
 
 function loadSavedCheckoutInfo() {

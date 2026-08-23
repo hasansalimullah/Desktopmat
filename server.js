@@ -5,7 +5,7 @@
 // from the client are NEVER trusted — the server always resolves the
 // correct Stripe Price ID from stripe-catalog.json, a trusted
 // server-side mapping built directly from your Stripe dashboard export
-// (26 Product IDs, 130 Price IDs). The client only ever sends a
+// (28 Product IDs, 140 Price IDs). The client only ever sends a
 // productId + size string; the server looks up the real price.
 //
 // If you add/remove/rename a Stripe product or price, regenerate
@@ -39,7 +39,6 @@ const SHIPPING_RATES = {
   overnight: { label: 'Overnight Shipping (1 business day)', amount: 29.99 },
 };
 const TAX_RATE = 0.0; // flat-rate estimated tax, adjust as needed (0–1)
-const FREE_SHIPPING_CODE = 'ONLYIKNOW';
 const WELCOME_DISCOUNT_CODE = 'WELCOME10';
 
 async function getWelcomePromotionCode(stripe) {
@@ -159,9 +158,7 @@ app.post('/create-checkout-session', async (req, res) => {
     // Shipping
     const method = SHIPPING_RATES[shippingMethod] ? shippingMethod : 'standard';
     const subtotalDollars = subtotalCents / 100;
-    const testingOnly = items.every((item) => item && item.productId === 'testing');
-    const promoFreeShipping = testingOnly && normalizePromoCode(promoCode) === FREE_SHIPPING_CODE;
-    const freeShipping = promoFreeShipping || subtotalDollars >= FREE_SHIPPING_THRESHOLD;
+    const freeShipping = subtotalDollars >= FREE_SHIPPING_THRESHOLD;
     const shippingAmount = freeShipping ? 0 : SHIPPING_RATES[method].amount;
 
     if (shippingAmount > 0) {
@@ -206,7 +203,7 @@ app.post('/create-checkout-session', async (req, res) => {
       metadata: {
         freeShipping: String(freeShipping),
         shippingMethod: method,
-        promoCode: promoFreeShipping ? FREE_SHIPPING_CODE : welcomeDiscount ? WELCOME_DISCOUNT_CODE : '',
+        promoCode: welcomeDiscount ? WELCOME_DISCOUNT_CODE : '',
         trackingNumber,
       },
     });

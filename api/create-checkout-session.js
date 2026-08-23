@@ -10,7 +10,6 @@ const SHIPPING_RATES = {
   overnight: { label: 'Overnight Shipping (1 business day)', amount: 29.99 },
 };
 const FREE_SHIPPING_THRESHOLD = 75;
-const FREE_SHIPPING_CODE = 'ONLYIKNOW';
 const WELCOME_DISCOUNT_CODE = 'WELCOME10';
 
 async function getWelcomePromotionCode(stripe) {
@@ -66,9 +65,7 @@ module.exports = async function handler(req, res) {
     }
 
     const method = SHIPPING_RATES[shippingMethod] ? shippingMethod : 'standard';
-    const testingOnly = items.every((item) => item?.productId === 'testing');
-    const promoFreeShipping = testingOnly && normalizePromoCode(promoCode) === FREE_SHIPPING_CODE;
-    const shippingAmount = promoFreeShipping || subtotalCents / 100 >= FREE_SHIPPING_THRESHOLD
+    const shippingAmount = subtotalCents / 100 >= FREE_SHIPPING_THRESHOLD
       ? 0 : SHIPPING_RATES[method].amount;
     if (shippingAmount > 0) {
       line_items.push({
@@ -94,7 +91,7 @@ module.exports = async function handler(req, res) {
       customer_email: contact?.email || undefined,
       shipping_address_collection: { allowed_countries: ['US', 'CA'] },
       discounts,
-      metadata: { freeShipping: String(shippingAmount === 0), shippingMethod: method, promoCode: promoFreeShipping ? FREE_SHIPPING_CODE : welcomeDiscount ? WELCOME_DISCOUNT_CODE : '', trackingNumber },
+      metadata: { freeShipping: String(shippingAmount === 0), shippingMethod: method, promoCode: welcomeDiscount ? WELCOME_DISCOUNT_CODE : '', trackingNumber },
     });
     return res.status(200).json({ url: session.url });
   } catch (error) {

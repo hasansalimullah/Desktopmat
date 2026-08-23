@@ -323,14 +323,6 @@
       "80 × 40 cm": "price_1U7RSRFVjkiMlGd80LzVAeAZ"
     }
   },
-  "testing": {
-    "stripeProductName": "testing",
-    "displayName": "testing",
-    "productId": "prod_V7pchyR7r3iR34",
-    "prices": {
-      "60 × 35 cm": "price_1U7ZxhFVjkiMlGd8yPuQLf0O"
-    }
-  },
   "dark-gray": {
     "stripeProductName": "Dark Gray Desktop Mat",
     "displayName": "Dark Gray",
