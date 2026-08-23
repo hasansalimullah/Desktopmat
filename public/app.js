@@ -599,7 +599,13 @@ async function submitCheckout(e) {
         contact: checkoutState.contact,
       }),
     });
-    const data = await res.json();
+    const responseText = await res.text();
+    let data;
+    try {
+      data = JSON.parse(responseText);
+    } catch {
+      throw new Error(`Checkout endpoint returned an invalid response (${res.status}).`);
+    }
     if (!res.ok) throw new Error(data.error || 'Checkout failed');
     window.location.href = data.url; // Stripe Checkout hosted page
   } catch (err) {
@@ -623,7 +629,13 @@ async function renderConfirmation(sessionId) {
 
   try {
     const res = await fetch(`/order-details?session_id=${encodeURIComponent(id)}`);
-    const order = await res.json();
+    const responseText = await res.text();
+    let order;
+    try {
+      order = JSON.parse(responseText);
+    } catch {
+      throw new Error(`Order endpoint returned an invalid response (${res.status}).`);
+    }
     if (!res.ok) throw new Error(order.error || 'Could not load order');
 
     cart = []; // clear cart state after a successful order
