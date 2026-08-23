@@ -9,7 +9,9 @@ let checkoutState = {
   address: { firstName: '', lastName: '', street: '', city: '', state: '', zip: '', country: 'US' },
   shippingMethod: 'standard',
   promoCode: '',
+  saveInfo: false,
 };
+const SAVED_INFO_KEY = 'desktopmat_checkout_info';
 
 const METALLIC_PRODUCT_IDS = new Set(['bronze', 'silver']);
 const FREE_SHIPPING_CODE = 'ONLYIKNOW';
@@ -366,6 +368,26 @@ function promoFreeShippingEligible() {
     && checkoutState.promoCode.replace(/\s+/g, '').toUpperCase() === FREE_SHIPPING_CODE;
 }
 
+function loadSavedCheckoutInfo() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(SAVED_INFO_KEY));
+    if (!saved) return;
+    checkoutState.contact = { ...checkoutState.contact, ...saved.contact };
+    checkoutState.address = { ...checkoutState.address, ...saved.address };
+    checkoutState.saveInfo = true;
+  } catch {
+    localStorage.removeItem(SAVED_INFO_KEY);
+  }
+}
+
+function saveCheckoutInfo() {
+  if (checkoutState.saveInfo) {
+    localStorage.setItem(SAVED_INFO_KEY, JSON.stringify({ contact: checkoutState.contact, address: checkoutState.address }));
+  } else {
+    localStorage.removeItem(SAVED_INFO_KEY);
+  }
+}
+
 function updateCartBadge() {
   const count = cart.reduce((n, c) => n + c.qty, 0);
   const badge = document.getElementById('cart-badge');
@@ -507,21 +529,21 @@ function renderCheckout() {
       <form class="checkout-form" id="checkout-form" onsubmit="submitCheckout(event)">
         <div class="form-section">
           <h3>Contact</h3>
-          <div class="field"><label>Email</label><input type="email" required id="cf-email" value="${checkoutState.contact.email}" placeholder="you@example.com" /></div>
+          <div class="field"><label>Email</label><input type="email" autocomplete="email" required id="cf-email" value="${checkoutState.contact.email}" placeholder="you@example.com" /></div>
         </div>
 
         <div class="form-section">
           <h3>Shipping address</h3>
           <div class="form-grid">
-            <div class="field"><label>First name</label><input required id="cf-first" value="${checkoutState.address.firstName}" /></div>
-            <div class="field"><label>Last name</label><input required id="cf-last" value="${checkoutState.address.lastName}" /></div>
-            <div class="field full"><label>Street address</label><input required id="cf-street" value="${checkoutState.address.street}" /></div>
-            <div class="field"><label>City</label><input required id="cf-city" value="${checkoutState.address.city}" /></div>
-            <div class="field"><label>State</label><input required id="cf-state" value="${checkoutState.address.state}" /></div>
-            <div class="field"><label>ZIP code</label><input required id="cf-zip" value="${checkoutState.address.zip}" /></div>
+            <div class="field"><label>First name</label><input autocomplete="given-name" required id="cf-first" value="${checkoutState.address.firstName}" /></div>
+            <div class="field"><label>Last name</label><input autocomplete="family-name" required id="cf-last" value="${checkoutState.address.lastName}" /></div>
+            <div class="field full"><label>Street address</label><input autocomplete="street-address" required id="cf-street" value="${checkoutState.address.street}" /></div>
+            <div class="field"><label>City</label><input autocomplete="address-level2" required id="cf-city" value="${checkoutState.address.city}" /></div>
+            <div class="field"><label>State</label><input autocomplete="address-level1" required id="cf-state" value="${checkoutState.address.state}" /></div>
+            <div class="field"><label>ZIP code</label><input autocomplete="postal-code" required id="cf-zip" value="${checkoutState.address.zip}" /></div>
             <div class="field">
               <label>Country</label>
-              <select id="cf-country">
+              <select autocomplete="country" id="cf-country">
                 <option value="US" ${checkoutState.address.country === 'US' ? 'selected' : ''}>United States</option>
                 <option value="CA" ${checkoutState.address.country === 'CA' ? 'selected' : ''}>Canada</option>
               </select>
@@ -540,6 +562,10 @@ function renderCheckout() {
               <div class="ship-option-price">${freeShip ? 'Free' : fmt(r.price)}</div>
             </div>
           `).join('')}
+        </div>
+
+        <div class="form-section">
+          <label style="display:flex;gap:8px;align-items:center;font-size:13px;"><input type="checkbox" id="save-info" ${checkoutState.saveInfo ? 'checked' : ''} /> Save my contact and shipping info for future orders</label>
         </div>
 
         <div class="form-section">
@@ -596,14 +622,17 @@ async function submitCheckout(e) {
   e.preventDefault();
   checkoutState.contact.email = document.getElementById('cf-email').value;
   checkoutState.address = {
-    firstName: document.getElementById('cf-first').value,
-    lastName: document.getElementById('cf-last').value,
-    street: document.getElementById('cf-street').value,
-    city: document.getElementById('cf-city').value,
-    state: document.getElementById('cf-state').value,
-    zip: document.getElementById('cf-zip').value,
+    firstName: document.getElementById('cf-first').value.trim(),
+    lastName: document.getElementById('cf-last').value.trim(),
+    street: document.getElementById('cf-street').value.trim(),
+    city: document.getElementById('cf-city').value.trim(),
+    state: document.getElementById('cf-state').value.trim().toUpperCase(),
+    zip: document.getElementById('cf-zip').value.trim(),
     country: document.getElementById('cf-country').value,
   };
+  checkoutState.contact.email = checkoutState.contact.email.trim().toLowerCase();
+  checkoutState.saveInfo = document.getElementById('save-info').checked;
+  saveCheckoutInfo();
   checkoutState.promoCode = document.getElementById('promo-input').value.trim();
 
   const btn = document.getElementById('checkout-submit');
@@ -669,6 +698,7 @@ async function renderConfirmation(sessionId) {
         <h1 style="font-size:26px;">Order confirmed</h1>
         <p style="color:var(--text-muted);margin-top:8px;">A confirmation has been sent to ${order.customer_email || 'your email'}.</p>
         <div class="confirm-detail">
+          <div class="row" style="display:flex;justify-content:space-between;padding:6px 0;font-size:14px;"><span>Order tracking number</span><strong>${order.tracking_number || 'Pending'}</strong></div>
           ${order.line_items.map((li) => `
             <div class="row" style="display:flex;justify-content:space-between;padding:6px 0;font-size:14px;">
               <span>${li.description} × ${li.quantity}</span><span>${fmt(li.amount_total / 100)}</span>
@@ -695,6 +725,7 @@ window.toggleMobileNav = toggleMobileNav;
 
 // ---------- Init ----------
 (async function init() {
+  loadSavedCheckoutInfo();
   await loadProducts();
   const params = new URLSearchParams(window.location.search);
   const page = params.get('page');

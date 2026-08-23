@@ -21,6 +21,7 @@ module.exports = async function handler(req, res) {
       customer_email: session.customer_details?.email || null,
       amount_total: session.amount_total,
       currency: session.currency,
+      tracking_number: session.metadata?.trackingNumber || null,
       shipping: session.shipping_details || null,
       line_items: session.line_items?.data.map((item) => ({
         description: item.description,

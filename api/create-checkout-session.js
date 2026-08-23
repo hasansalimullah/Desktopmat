@@ -1,4 +1,5 @@
 const Stripe = require('stripe');
+const crypto = require('crypto');
 
 const catalog = require('../public/products.json');
 const stripeCatalog = require('../stripe-catalog.json');
@@ -70,6 +71,7 @@ module.exports = async function handler(req, res) {
 
     const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
     const domain = process.env.DOMAIN || `https://${req.headers.host}`;
+    const trackingNumber = `DM-${crypto.randomBytes(5).toString('hex').toUpperCase()}`;
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       line_items,
@@ -77,7 +79,7 @@ module.exports = async function handler(req, res) {
       cancel_url: `${domain}/?page=cart`,
       customer_email: contact?.email || undefined,
       shipping_address_collection: { allowed_countries: ['US', 'CA'] },
-      metadata: { freeShipping: String(shippingAmount === 0), shippingMethod: method, promoCode: promoFreeShipping ? FREE_SHIPPING_CODE : '' },
+      metadata: { freeShipping: String(shippingAmount === 0), shippingMethod: method, promoCode: promoFreeShipping ? FREE_SHIPPING_CODE : '', trackingNumber },
     });
     return res.status(200).json({ url: session.url });
   } catch (error) {

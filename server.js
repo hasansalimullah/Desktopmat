@@ -17,6 +17,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const Stripe = require('stripe');
+const crypto = require('crypto');
 
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 const DOMAIN = process.env.DOMAIN || 'http://localhost:3000';
@@ -189,6 +190,7 @@ app.post('/create-checkout-session', async (req, res) => {
         freeShipping: String(freeShipping),
         shippingMethod: method,
         promoCode: promoFreeShipping ? FREE_SHIPPING_CODE : '',
+        trackingNumber: `DM-${crypto.randomBytes(5).toString('hex').toUpperCase()}`,
       },
     });
 
@@ -215,6 +217,7 @@ app.get('/order-details', async (req, res) => {
       customer_email: session.customer_details ? session.customer_details.email : null,
       amount_total: session.amount_total,
       currency: session.currency,
+      tracking_number: session.metadata ? session.metadata.trackingNumber : null,
       shipping: session.shipping_details || null,
       line_items: session.line_items ? session.line_items.data.map((li) => ({
         description: li.description,
