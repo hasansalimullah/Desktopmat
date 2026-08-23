@@ -84,6 +84,10 @@ function storefrontProducts() {
   }, ...(testing ? [{ ...testing, tag: 'TEST' }] : []), ...PRODUCTS.filter((p) => METALLIC_PRODUCT_IDS.has(p.id))];
 }
 
+function allColorProducts() {
+  return PRODUCTS.filter((product) => !METALLIC_PRODUCT_IDS.has(product.id));
+}
+
 function productImage(product) {
   const file = COLOR_IMAGE_FILES[product.id];
   return file ? `/Images/Colored%20Mat/${encodeURIComponent(file)}` : '';
@@ -203,7 +207,7 @@ function cardHTML(product) {
 
 // ---------- Shop ----------
 function renderShop() {
-  const products = storefrontProducts();
+  const products = allColorProducts();
   app.innerHTML = `
     <div style="margin:40px 0 24px;">
       <h1 style="font-size:28px;">Shop all colors</h1>
@@ -242,7 +246,7 @@ window.onShopSearch = onShopSearch;
 window.onShopSort = onShopSort;
 
 function renderShopGrid() {
-  let list = [...storefrontProducts()];
+  let list = [...allColorProducts()];
 
   if (shopState.search.trim()) {
     const q = shopState.search.trim().toLowerCase();
