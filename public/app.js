@@ -159,6 +159,8 @@ function renderHome() {
       </div>
     </section>
 
+    ${homeReviewsHTML()}
+
     <section class="newsletter-section">
       <div>
         <span class="eyebrow">DESKTOPMAT NOTES</span>
@@ -348,10 +350,28 @@ function reviewsHTML(product, selectedVariant) {
         </div>
         <input type="hidden" name="rating" id="review-rating" value="" />
         <textarea name="comment" maxlength="600" placeholder="Share your experience" required></textarea>
+        <input name="image" type="file" accept="image/png,image/jpeg,image/webp" />
         <button class="btn btn-black" type="submit">Submit review</button>
       </form>
       <div class="review-list">${reviews.map((review) => `
-        <article class="review-item"><div class="review-item-top"><span class="review-author">${escapeHTML(review.name)}</span><span class="review-date">${escapeHTML(review.date)}</span></div><div class="review-stars" aria-label="${review.rating} out of 5 stars">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div><p class="review-text">${escapeHTML(review.comment)}</p></article>
+        <article class="review-item"><div class="review-item-top"><span class="review-author">${escapeHTML(review.name)}</span><span class="review-date">${escapeHTML(review.date)}</span></div><div class="review-stars" aria-label="${review.rating} out of 5 stars">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div><p class="review-text">${escapeHTML(review.comment)}</p>${review.image ? `<img class="review-image" src="${review.image}" alt="Photo shared by ${escapeHTML(review.name)}" />` : ''}</article>
+      `).join('')}</div>
+    </section>
+  `;
+}
+
+function homeReviewsHTML() {
+  let allReviews = [];
+  try {
+    const saved = JSON.parse(localStorage.getItem(REVIEWS_KEY) || '{}');
+    allReviews = Object.values(saved).flat().filter((review) => review && review.name && review.comment).slice(0, 6);
+  } catch { allReviews = []; }
+  if (!allReviews.length) return '';
+  return `
+    <section class="home-reviews" aria-labelledby="home-reviews-title">
+      <h2 id="home-reviews-title">What customers are saying</h2>
+      <div class="home-review-grid">${allReviews.slice(0, 3).map((review) => `
+        <article class="home-review-card"><div class="review-author">${escapeHTML(review.name)}</div><div class="review-stars" aria-label="${review.rating} out of 5 stars">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div><div class="reviews-summary">${escapeHTML(review.productName || 'DESKTOPMAT')}</div><p class="review-text">${escapeHTML(review.comment)}</p>${review.image ? `<img class="review-image" src="${review.image}" alt="Photo shared by ${escapeHTML(review.name)}" />` : ''}</article>
       `).join('')}</div>
     </section>
   `;
@@ -375,12 +395,31 @@ function submitReview(event, productId) {
     alert('Please choose a star rating.');
     return;
   }
-  let reviews = {};
-  try { reviews = JSON.parse(localStorage.getItem(REVIEWS_KEY) || '{}'); } catch { reviews = {}; }
-  if (!Array.isArray(reviews[productId])) reviews[productId] = [];
-  reviews[productId].unshift({ name: form.reviewer.value.trim(), rating, comment: form.comment.value.trim(), date: new Date().toLocaleDateString() });
-  localStorage.setItem(REVIEWS_KEY, JSON.stringify(reviews));
-  renderProduct(productId === 'colored-mat' ? 'colored-mat' : productId);
+  const imageFile = form.image.files[0];
+  if (imageFile && (!imageFile.type.startsWith('image/') || imageFile.size > 1500000)) {
+    alert('Please choose an image smaller than 1.5 MB.');
+    return;
+  }
+  const saveReview = (image) => {
+    let reviews = {};
+    try { reviews = JSON.parse(localStorage.getItem(REVIEWS_KEY) || '{}'); } catch { reviews = {}; }
+    if (!Array.isArray(reviews[productId])) reviews[productId] = [];
+    reviews[productId].unshift({ productName: findProduct(productId)?.name || productId, name: form.reviewer.value.trim(), rating, comment: form.comment.value.trim(), image, date: new Date().toLocaleDateString() });
+    try {
+      localStorage.setItem(REVIEWS_KEY, JSON.stringify(reviews));
+    } catch {
+      alert('This image is too large to save. Please choose a smaller image.');
+      return;
+    }
+    renderProduct(productId === 'colored-mat' ? 'colored-mat' : productId);
+  };
+  if (imageFile) {
+    const reader = new FileReader();
+    reader.onload = () => saveReview(reader.result);
+    reader.readAsDataURL(imageFile);
+    return;
+  }
+  saveReview('');
 }
 window.submitReview = submitReview;
 
