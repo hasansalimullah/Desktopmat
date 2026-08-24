@@ -35,7 +35,7 @@ app.get('/products/:productId', (req, res) => {
 });
 
 // ---- Shipping config (mirrors frontend copy) ----
-const FREE_SHIPPING_THRESHOLD = 75;
+const FREE_SHIPPING_THRESHOLD = 60;
 const SHIPPING_RATES = {
   standard: { label: 'Standard Shipping (5–7 business days)', amount: 6.99 },
   express: { label: 'Express Shipping (2–3 business days)', amount: 14.99 },
@@ -158,11 +158,23 @@ app.post('/create-checkout-session', async (req, res) => {
       subtotalCents += resolved.unitAmountCents * qtyNum;
     }
 
-    // Shipping
+        // Shipping
     const method = SHIPPING_RATES[shippingMethod] ? shippingMethod : 'standard';
     const subtotalDollars = subtotalCents / 100;
     const freeShipping = subtotalDollars >= FREE_SHIPPING_THRESHOLD;
     const shippingAmount = freeShipping ? 0 : SHIPPING_RATES[method].amount;
+
+    // Free 60x35cm mat gift when order qualifies for free shipping
+    if (freeShipping) {
+      line_items.push({
+        price_data: {
+          currency: 'usd',
+          product_data: { name: 'Free 60 × 35cm Desk Mat (Promo Gift)' },
+          unit_amount: 0,
+        },
+        quantity: 1,
+      });
+    }
 
     if (shippingAmount > 0) {
       line_items.push({

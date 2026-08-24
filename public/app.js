@@ -668,7 +668,7 @@ window.removeLine = removeLine;
 function renderCartPage() {
   const lines = cartLines();
   const subtotal = cartSubtotal();
-  const freeShip = subtotal >= 75;
+  const freeShip = subtotal >= 60;
 
   if (!lines.length) {
     app.innerHTML = `<div class="empty-state"><h2>Your bag is empty</h2><p>Find a color you like.</p><button class="btn btn-primary" style="margin-top:20px;" onclick="go('shop')">Shop all colors</button></div>`;
@@ -700,8 +700,8 @@ function renderCartPage() {
       </div>
       <div class="summary-panel">
         <div class="row"><span>Subtotal</span><span>${fmt(subtotal)}</span></div>
-        <div class="row"><span>Shipping</span><span>${freeShip ? 'Free' : 'Calculated at checkout'}</span></div>
-        ${!freeShip ? `<div class="row" style="color:var(--accent-tint);font-size:12px;">Free shipping over $75 — add ${fmt(75 - subtotal)} more</div>` : ''}
+         <div class="row"><span>Shipping</span><span>${freeShip ? 'Free' : 'Calculated at checkout'}</span></div>
+        ${freeShip ? `<div class="row" style="color:#008A5B;font-size:12px;">🎁 Free 60×35cm mat included with this order</div>` : `<div class="row" style="color:var(--accent-tint);font-size:12px;">Free shipping + free mat over $60 — add ${fmt(60 - subtotal)} more</div>`}
         <div class="row total"><span>Total</span><span>${fmt(subtotal)}</span></div>
         <button class="btn btn-primary btn-full btn-uppercase" style="margin-top:16px;" onclick="go('checkout')">Proceed to checkout</button>
       </div>
@@ -715,7 +715,7 @@ function renderCheckout() {
   if (!lines.length) { go('cart'); return; }
   if (checkoutState.shippingMethod !== 'standard') checkoutState.shippingMethod = 'standard';
   const subtotal = cartSubtotal();
-  const freeShip = subtotal >= 75 || promoFreeShippingEligible();
+  const freeShip = subtotal >= 60 || promoFreeShippingEligible();
   const discount = discountPercent();
 
   const rates = {
@@ -785,6 +785,7 @@ function renderCheckout() {
           <div class="row"><span>${l.product.name} · ${l.size.dims} × ${l.qty}</span><span>${fmt(l.size.price * l.qty)}</span></div>
         `).join('')}
         <div class="row"><span>Shipping</span><span id="checkout-shipping-cost">${freeShip ? 'Free' : fmt(shipCost)}</span></div>
+        ${freeShip ? `<div class="row" style="color:#008A5B;font-size:12px;">🎁 Free 60×35cm mat included</div>` : ''}
         <div class="row" id="checkout-discount-row" style="${discountPercent() ? '' : 'display:none;'}"><span>WELCOME10</span><span>-${fmt(subtotal * discountPercent() / 100)}</span></div>
         <div class="promo-row">
           <input placeholder="Promo code" id="promo-input" value="${checkoutState.promoCode}" />
@@ -811,7 +812,7 @@ function applyPromo() {
   input.placeholder = eligible ? 'Free shipping applied' : discount ? '10% discount applied' : 'Code not recognized';
   const lines = cartLines();
   const subtotal = cartSubtotal();
-  const freeShip = subtotal >= 75 || eligible;
+  const freeShip = subtotal >= 60 || eligible;
   const rates = { standard: 6.99, express: 14.99, overnight: 29.99 };
   const shippingCost = freeShip ? 0 : rates[checkoutState.shippingMethod];
   const shippingElement = document.getElementById('checkout-shipping-cost');
