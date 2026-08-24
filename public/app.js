@@ -563,9 +563,15 @@ async function signUpNewsletter(event) {
     localStorage.setItem('desktopmat_welcome_code', WELCOME_DISCOUNT_CODE);
     form.innerHTML = '<p>Thanks. Check your email for <strong>WELCOME10</strong>.</p>';
     document.getElementById('newsletter-modal-root').innerHTML = '';
-  } catch (error) {
+    } catch (error) {
     button.disabled = false;
-    alert(error.message);
+    let errorEl = form.querySelector('.newsletter-error');
+    if (!errorEl) {
+      errorEl = document.createElement('div');
+      errorEl.className = 'newsletter-error';
+      form.appendChild(errorEl);
+    }
+    errorEl.textContent = error.message;
   }
 }
 window.signUpNewsletter = signUpNewsletter;

@@ -110,6 +110,19 @@ function verifyStripeCatalog() {
 
 // ---- Routes ----
 
+app.post('/api/newsletter-signup', (req, res) => {
+  const { email } = req.body || {};
+  if (!email || typeof email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return res.status(400).json({ error: 'Please enter a valid email address.' });
+  }
+  // TODO: wire this up to a real email list provider (Mailchimp, ConvertKit,
+  // Beehiiv, etc). This just confirms the signup for now — note that
+  // Vercel's serverless filesystem doesn't persist between requests, so
+  // logging/writing to a local file here won't reliably save signups.
+  console.log('[newsletter] signup:', email);
+  res.json({ ok: true });
+});
+
 app.get('/api/health', (req, res) => {
   res.json({
     ok: true,
