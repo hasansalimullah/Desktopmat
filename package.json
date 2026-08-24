@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "vercel-build": "node generate-product-pages.js"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
