@@ -124,6 +124,7 @@ async function go(page, param) {
   toggleCart(false);
   toggleMobileNav(false);
   if (page === 'product' && param) window.history.pushState({}, '', productUrl(param));
+  if (page === 'info' && param) window.history.pushState({}, '', `/info/${param}`);
 
   switch (page) {
     case 'home': return renderHome();
@@ -939,9 +940,12 @@ window.toggleMobileNav = toggleMobileNav;
   const params = new URLSearchParams(window.location.search);
   const page = params.get('page');
   const sessionId = params.get('session_id');
-  const productMatch = window.location.pathname.match(/^\/products\/([^/]+)\/?$/);
+    const productMatch = window.location.pathname.match(/^\/products\/([^/]+)\/?$/);
+  const infoMatch = window.location.pathname.match(/^\/info\/([^/]+)\/?$/);
   if (productMatch) {
     renderProduct(decodeURIComponent(productMatch[1]));
+  } else if (infoMatch) {
+    renderInfoPage(decodeURIComponent(infoMatch[1]));
   } else if (page === 'confirmation' && sessionId) {
     renderConfirmation(sessionId);
   } else {
