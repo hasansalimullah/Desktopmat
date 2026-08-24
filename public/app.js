@@ -41,7 +41,7 @@ const app = document.getElementById('app');
 async function loadProducts() {
   if (PRODUCTS.length) return PRODUCTS;
   try {
-    const res = await fetch('./products.json');
+    const res = await fetch('/products.json');
     if (!res.ok) throw new Error(`products.json request failed (${res.status})`);
     PRODUCTS = await res.json();
     return PRODUCTS;
