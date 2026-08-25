@@ -886,6 +886,27 @@ async function submitCheckout(e) {
 window.submitCheckout = submitCheckout;
 
 // ---------- Confirmation ----------
+function showGoogleReviewOptIn(order, sessionId) {
+  if (!window.gapi) {
+    setTimeout(() => showGoogleReviewOptIn(order, sessionId), 300);
+    return;
+  }
+  const country = (order.shipping && order.shipping.address && order.shipping.address.country) || 'US';
+  const estimatedDelivery = new Date();
+  estimatedDelivery.setDate(estimatedDelivery.getDate() + 7); // rough estimate, matches standard shipping window
+  const deliveryDateStr = estimatedDelivery.toISOString().slice(0, 10); // YYYY-MM-DD
+
+  window.gapi.load('surveyoptin', function () {
+    window.gapi.surveyoptin.render({
+      merchant_id: 5842669989,
+      order_id: sessionId,
+      email: order.customer_email || '',
+      delivery_country: country,
+      estimated_delivery_date: deliveryDateStr,
+    });
+  });
+}
+
 async function renderConfirmation(sessionId) {
   const params = new URLSearchParams(window.location.search);
   const id = sessionId || params.get('session_id');
@@ -928,6 +949,7 @@ async function renderConfirmation(sessionId) {
         <button class="btn btn-primary" style="margin-top:28px;" onclick="go('shop')">Continue shopping</button>
       </div>
     `;
+    showGoogleReviewOptIn(order, id);
   } catch (err) {
     app.innerHTML = `<div class="empty-state"><h2>Couldn't load order</h2><p>${err.message}</p></div>`;
   }
