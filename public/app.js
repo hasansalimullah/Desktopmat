@@ -358,7 +358,7 @@ function reviewsHTML(product, selectedVariant) {
     <section class="reviews-section" aria-labelledby="reviews-title">
       <div class="review-overview">
         <div class="review-overview-top"><h2 id="reviews-title">Reviews</h2><span>|</span><span class="review-overview-average">${reviews.length ? average.toFixed(1) : '0.0'}</span><span class="review-overview-stars" aria-label="${average.toFixed(1)} out of 5 stars">★★★★★</span><span class="reviews-summary">${reviews.length} rating${reviews.length === 1 ? '' : 's'}</span><span class="review-verified">✓ Customer reviews</span></div>
-        <div class="review-bars">${[['Ease of use', 5], ['Design', 4], ['Quality of material', 3]].map(([label, rating]) => `<div class="review-bar"><div class="review-bar-top"><span>${label}</span><strong>${ratingPercent(rating)}%</strong></div><div class="review-bar-track"><div class="review-bar-fill" style="width:${ratingPercent(rating)}%"></div></div></div>`).join('')}</div>
+        <div class="review-bars">${[['Ease of use', 5], ['Design', 4]].map(([label, rating]) => `<div class="review-bar"><div class="review-bar-top"><span>${label}</span><strong>${ratingPercent(rating)}%</strong></div><div class="review-bar-track"><div class="review-bar-fill" style="width:${ratingPercent(rating)}%"></div></div></div>`).join('')}</div>
         <div class="review-filters"><button class="review-filter" type="button">All ratings</button><button class="review-filter" type="button">▧ (${photoCount})</button><button class="review-filter" type="button">★★★★★ (${reviews.filter((review) => review.rating === 5).length})</button></div>
       </div>
       <form class="review-form" onsubmit="submitReview(event, '${productId}')">

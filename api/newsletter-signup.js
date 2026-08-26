@@ -34,11 +34,15 @@ module.exports = async function handler(req, res) {
   try {
     for (const message of messages) {
       const response = await fetch(RESEND_ENDPOINT, { method: 'POST', headers, body: JSON.stringify(message) });
-      if (!response.ok) throw new Error(`Resend returned ${response.status}`);
+      if (!response.ok) {
+        const errorBody = await response.text();
+        console.error(`[newsletter] Resend rejected (${response.status}) sending to ${message.to[0]}:`, errorBody);
+        throw new Error(`Resend returned ${response.status}: ${errorBody}`);
+      }
     }
     return res.status(200).json({ ok: true, code: 'WELCOME10' });
   } catch (error) {
-    console.error('[newsletter] error:', error);
+    console.error('[newsletter] error:', error.message);
     return res.status(502).json({ error: 'Unable to send the newsletter email.' });
   }
 };
