@@ -28,7 +28,8 @@
 <title>DESKTOPMAT — Minimal desk mats</title>
 <meta name="description" content="Premium DESKTOPMAT desk mats in 28 colors and five sizes. Smooth glide, stitched edges, and a non-slip base for focused work." />
 <link rel="canonical" href="https://desktopmat.com/" />
-<link rel="icon" type="image/png" href="/Images/logo(white).png" />
+<link rel="icon" type="image/png" href="/Images/logo(black).png" />
+<link rel="apple-touch-icon" href="/Images/logo(black).png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
@@ -260,7 +261,7 @@
   .review-overview-average { font-size: 21px; font-weight: 700; }
   .review-overview-stars { color: #F2B84B; letter-spacing: 2px; font-size: 19px; }
   .review-verified { color: #008A5B; font-size: 13px; font-weight: 600; }
-  .review-bars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 18px; }
+  .review-bars { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 18px; max-width: 480px; }
   .review-bar { padding: 10px 12px; background: var(--bg-soft); font-size: 12px; }
   .review-bar-top { display: flex; justify-content: space-between; gap: 8px; }
   .review-bar-track { height: 5px; margin-top: 8px; background: var(--border); }
@@ -269,7 +270,13 @@
   .review-filter { padding: 9px 12px; border: 1px solid var(--border); background: white; border-radius: var(--r-sm); font-size: 12px; }
   .review-form { display: grid; gap: 12px; background: var(--bg-soft); border-radius: var(--r-card); padding: 20px; margin-bottom: 24px; }
   .review-form input, .review-form textarea { width: 100%; padding: 11px 13px; border: 1px solid var(--border); border-radius: var(--r-sm); font: inherit; background: white; }
-  .review-form input[type="file"] { padding: 9px; font-size: 12px; }
+  .review-form input[type="file"] { padding: 9px 13px; font-size: 13px; color: var(--text-muted); cursor: pointer; }
+  .review-form input[type="file"]::file-selector-button {
+    padding: 8px 14px; margin-right: 12px; border: none; border-radius: var(--r-sm);
+    background: var(--text); color: white; font-weight: 700; font-size: 12px;
+    cursor: pointer; transition: background 0.15s ease;
+  }
+  .review-form input[type="file"]::file-selector-button:hover { background: #000; }
   .review-form textarea { min-height: 96px; resize: vertical; }
   .review-rating { display: flex; align-items: center; gap: 6px; }
   .review-rating button { color: #C8CDD7; font-size: 24px; line-height: 1; }
