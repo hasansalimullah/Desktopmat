@@ -127,7 +127,7 @@ async function go(page, param) {
   if (page === 'info' && param) window.history.pushState({}, '', `/info/${param}`);
 
   switch (page) {
-    case 'home': return renderHome();
+    case 'home': return await renderHome();
     case 'shop': return renderShop();
     case 'product': return renderProduct(param);
     case 'cart': return renderCartPage();
@@ -140,8 +140,9 @@ async function go(page, param) {
 window.go = go;
 
 // ---------- Home ----------
-function renderHome() {
+async function renderHome() {
   const featured = storefrontProducts();
+  const reviewsSection = await homeReviewsHTML();
   app.innerHTML = `
     <section class="hero">
       <div>
@@ -165,7 +166,7 @@ function renderHome() {
       </div>
     </section>
 
-    ${homeReviewsHTML()}
+    ${reviewsSection}
 
     <section class="newsletter-section">
       <div>
@@ -326,8 +327,12 @@ function renderProduct(id) {
         <p class="pdp-desc">${product.desc}</p>
       </div>
     </div>
-    ${reviewsHTML(product, selectedVariant)}
+        <div id="reviews-mount"><p style="text-align:center;color:var(--text-muted);padding:40px 0;">Loading reviews…</p></div>
   `;
+  reviewsFor(product.variants ? selectedVariant.id : product.id).then((reviews) => {
+    const mount = document.getElementById('reviews-mount');
+    if (mount) mount.outerHTML = reviewsHTML(product, selectedVariant, reviews);
+  });
 }
 
 function escapeHTML(value) {
@@ -339,18 +344,19 @@ function privateName(name) {
   return parts.length ? parts.map((part) => `${part.charAt(0).toUpperCase()}*****`).join(' ') : 'Customer';
 }
 
-function reviewsFor(productId) {
+async function reviewsFor(productId) {
   try {
-    const reviews = JSON.parse(localStorage.getItem(REVIEWS_KEY) || '{}');
-    return Array.isArray(reviews[productId]) ? reviews[productId] : [];
+    const res = await fetch(`/api/reviews?productId=${encodeURIComponent(productId)}`);
+    if (!res.ok) return [];
+    const data = await res.json();
+    return Array.isArray(data.reviews) ? data.reviews : [];
   } catch {
     return [];
   }
 }
 
-function reviewsHTML(product, selectedVariant) {
+function reviewsHTML(product, selectedVariant, reviews) {
   const productId = product.variants ? selectedVariant.id : product.id;
-  const reviews = reviewsFor(productId);
   const average = reviews.length ? reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length : 0;
   const ratingPercent = (rating) => reviews.length ? Math.round(reviews.filter((review) => review.rating === rating).length / reviews.length * 100) : 0;
   const photoCount = reviews.filter((review) => review.image).length;
@@ -379,11 +385,14 @@ function reviewsHTML(product, selectedVariant) {
   `;
 }
 
-function homeReviewsHTML() {
+async function homeReviewsHTML() {
   let allReviews = [];
   try {
-    const saved = JSON.parse(localStorage.getItem(REVIEWS_KEY) || '{}');
-    allReviews = Object.values(saved).flat().filter((review) => review && review.name && review.comment).slice(0, 6);
+    const res = await fetch('/api/reviews?home=1');
+    if (res.ok) {
+      const data = await res.json();
+      allReviews = Array.isArray(data.reviews) ? data.reviews : [];
+    }
   } catch { allReviews = []; }
   if (!allReviews.length) return '';
   return `
@@ -419,18 +428,29 @@ function submitReview(event, productId) {
     alert('Please choose an image smaller than 1.5 MB.');
     return;
   }
-  const saveReview = (image) => {
-    let reviews = {};
-    try { reviews = JSON.parse(localStorage.getItem(REVIEWS_KEY) || '{}'); } catch { reviews = {}; }
-    if (!Array.isArray(reviews[productId])) reviews[productId] = [];
-    reviews[productId].unshift({ productName: findProduct(productId)?.name || productId, name: form.reviewer.value.trim(), rating, comment: form.comment.value.trim(), image, date: new Date().toLocaleDateString() });
+  const saveReview = async (image) => {
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
     try {
-      localStorage.setItem(REVIEWS_KEY, JSON.stringify(reviews));
-    } catch {
-      alert('This image is too large to save. Please choose a smaller image.');
-      return;
+      const res = await fetch('/api/reviews', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          productId,
+          productName: findProduct(productId)?.name || productId,
+          name: form.reviewer.value.trim(),
+          rating,
+          comment: form.comment.value.trim(),
+          image,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Could not submit review.');
+      renderProduct(productId === 'colored-mat' ? 'colored-mat' : productId);
+    } catch (err) {
+      submitBtn.disabled = false;
+      alert(err.message);
     }
-    renderProduct(productId === 'colored-mat' ? 'colored-mat' : productId);
   };
   if (imageFile) {
     const reader = new FileReader();
